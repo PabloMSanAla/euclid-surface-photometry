@@ -4,4 +4,4 @@ euclid_pipelines.py
 euclid_profile*
 *test.yaml
 __pycache__/*
-./.??*
+.*
