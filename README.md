@@ -1,4 +1,5 @@
-# Euclid Surface Photometry Pipeline
+# 📖 Documentation: https://euclid-surface-photometry.readthedocs.io/en/latest/index.html
+# Euclid Surface Photometry Pipeline    
 
 This repository contains the code and configuration files for running the Euclid surface photometry pipeline, as described in *Euclid Consortium: Sanchez-Alarcon et al. (2026)*.
 
