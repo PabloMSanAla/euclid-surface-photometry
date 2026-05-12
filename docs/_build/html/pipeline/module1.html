@@ -1,0 +1,280 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 1 – Cutouts and Masks &mdash; Euclid Surface Photometry Pipeline 0.1.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=92734c54"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"macros": {"IE": "I_\\mathrm{E}", "YE": "Y_\\mathrm{E}", "JE": "J_\\mathrm{E}", "HE": "H_\\mathrm{E}"}}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 2 – Position Angle and Ellipticity Profiles" href="module2.html" />
+    <link rel="prev" title="Pipeline Overview" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Euclid Surface Photometry Pipeline
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../science.html">Scientific Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Pipeline Overview</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#data-flow">Data flow</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Module 1 – Cutouts and Masks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#euclid_pipelines.euclid_module1"><code class="docutils literal notranslate"><span class="pre">euclid_module1()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scientific-description">Scientific description</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="module2.html">Module 2 – Position Angle and Ellipticity Profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="module3.html">Module 3 – Sky Background and Surface Brightness Profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="module4.html">Module 4 – Derived Photometric Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="module5.html">Module 5 – Disc Break Classification</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Euclid Surface Photometry Pipeline</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Pipeline Overview</a></li>
+      <li class="breadcrumb-item active">Module 1 – Cutouts and Masks</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pipeline/module1.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-1-cutouts-and-masks">
+<span id="module1"></span><h1>Module 1 – Cutouts and Masks<a class="headerlink" href="#module-1-cutouts-and-masks" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.euclid_module1">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">euclid_module1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ra</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inPath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outPath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addMERback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#euclid_module1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.euclid_module1" title="Link to this definition"></a></dt>
+<dd><p>Euclid Pipeline 1.
+Given an object ID of Euclid, create a cutout of 5xkron_radius, and
+gerenates a mask for that source using Euclid SEGMENT, NoiseChisel and
+MTObjecst for deblending sources inside the galaxy.</p>
+<p>Fortmat of cutout: EUC_SEGMID-{object_id}_cutout.fits
+Fortmat of mask:   EUC_SEGMID-{object_id}_mask.fits</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>object_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Euclid’s object ID of the source</p></li>
+<li><p><strong>ra</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Right Ascension of the source</p></li>
+<li><p><strong>dec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Declination of the source</p></li>
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Size of the cutout in degrees</p></li>
+<li><p><strong>inPath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to the input data (MER mosaics)</p></li>
+<li><p><strong>outPath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to save the cutout and mask</p></li>
+<li><p><strong>addMerBack</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – If True, add the MER background to the cutout.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>cutoutFile</strong> (<em>str</em>) – Path to the cutout file</p></li>
+<li><p><strong>maskFile</strong> (<em>str</em>) – Path to the mask file</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="scientific-description">
+<h2>Scientific description<a class="headerlink" href="#scientific-description" title="Link to this heading"></a></h2>
+<p>The first step of the pipeline constructs multi-band cutout images centred on
+each galaxy and generates a contamination mask capable of preserving the very
+faint outskirts of the target.</p>
+<section id="cutout-creation">
+<h3>Cutout creation<a class="headerlink" href="#cutout-creation" title="Link to this heading"></a></h3>
+<p>For each galaxy a square cutout of side <span class="math notranslate nohighlight">\(5\,R_\mathrm{Kron}\)</span> is extracted
+from every available band in the MER mosaics:</p>
+<ul class="simple">
+<li><p><strong>VIS</strong> (<span class="math notranslate nohighlight">\(I_\mathrm{E}\)</span>, 0.1 arcsec pixel⁻¹)</p></li>
+<li><p><strong>NISP near-infrared</strong>: <span class="math notranslate nohighlight">\(Y_\mathrm{E}\)</span>, <span class="math notranslate nohighlight">\(J_\mathrm{E}\)</span>, <span class="math notranslate nohighlight">\(H_\mathrm{E}\)</span> (0.3 arcsec pixel⁻¹, resampled to 0.1 by MER)</p></li>
+<li><p><strong>External optical</strong> (UNIONS <em>ugriz</em> in EDF-N; DES <em>griz</em> in EDF-S/F)</p></li>
+</ul>
+<p>The large cutout size ensures that enough sky background is available for a
+reliable background estimation in M3 and for accurate masking in the outer
+regions.</p>
+</section>
+<section id="background-model-restoration">
+<h3>Background model restoration<a class="headerlink" href="#background-model-restoration" title="Link to this heading"></a></h3>
+<p>The MER pipeline subtracts a large-scale background model before delivering
+the science mosaics (<code class="docutils literal notranslate"><span class="pre">EUC_MER_BGSUB-MOSAIC</span></code>).  This subtraction can
+over-remove flux at the positions of large or bright galaxies (<a href="#id1"><span class="problematic" id="id2">:cite:t:`Urbano25`</span></a>).
+To mitigate this effect, the MER background model (<code class="docutils literal notranslate"><span class="pre">EUC_MER_BGMOD</span></code>) is added
+back to each cutout before any further analysis.</p>
+</section>
+<section id="centre-refinement">
+<h3>Centre refinement<a class="headerlink" href="#centre-refinement" title="Link to this heading"></a></h3>
+<p>After constructing the VIS cutout, the galaxy centre is refined using the
+<strong>Hill Climb</strong> algorithm of <strong>AutoProf</strong> (<a href="#id3"><span class="problematic" id="id4">:cite:t:`Autoprof`</span></a>).  The algorithm
+applies iterative FFT-based gradient detection followed by parabolic fitting
+and Nelder-Mead optimisation to converge on the global flux peak, ignoring
+local features such as bars or HII regions.  The updated (RA, Dec) coordinates
+are propagated to all subsequent modules.</p>
+</section>
+<section id="mask-generation">
+<h3>Mask generation<a class="headerlink" href="#mask-generation" title="Link to this heading"></a></h3>
+<p>Reliable masks are critical for measuring surface brightness profiles to low
+surface brightness levels.  A multi-step hierarchical masking strategy is used:</p>
+<ol class="arabic">
+<li><p><strong>MER segmentation map</strong> (<code class="docutils literal notranslate"><span class="pre">EUC_MER_FINAL-SEGMAP</span></code>): provides an initial
+catalogue of detected sources from <strong>SourceXtractor++</strong>.</p></li>
+<li><p><strong>NoiseChisel</strong> (<a href="#id5"><span class="problematic" id="id6">:cite:t:`noisechisel`</span></a>): detects all pixels with signal down
+to very low S/N on the VIS image.  A detection map is produced that serves
+as the target map for watershed filling.</p></li>
+<li><p><strong>Watershed growing</strong>: the MER segments are grown to fill the NoiseChisel
+detection map using the <code class="docutils literal notranslate"><span class="pre">scikit-image.segmentation.watershed</span></code> algorithm
+(<a href="#id7"><span class="problematic" id="id8">:cite:t:`scikit-image`</span></a>) applied to an LRGB image constructed from
+<span class="math notranslate nohighlight">\(J_\mathrm{E}\)</span>, <span class="math notranslate nohighlight">\(H_\mathrm{E}\)</span>, <span class="math notranslate nohighlight">\(Y_\mathrm{E}\)</span> (colour
+channels) and <span class="math notranslate nohighlight">\(I_\mathrm{E}\)</span> (luminance), stretched with the
+<code class="docutils literal notranslate"><span class="pre">asinh</span></code> transform.  The colour information improves deblending performance
+compared to using a single band.</p></li>
+<li><p><strong>MTObjects deblending</strong> (<a href="#id9"><span class="problematic" id="id10">:cite:t:`mtobjects`</span></a>): run on the VIS image with
+<code class="docutils literal notranslate"><span class="pre">move_factor</span> <span class="pre">=</span> <span class="pre">0.3</span></code> to identify sub-structure within the galaxy footprint.</p></li>
+<li><p><strong>Cosine similarity filter</strong>: distinguishes foreground/background sources
+from real galaxy substructure using the multi-band colour vector.</p>
+<p>For each pixel at position <span class="math notranslate nohighlight">\((i,j)\)</span>, the cosine similarity to the
+mean galaxy colour <span class="math notranslate nohighlight">\(\vec{g} = (g_{I_\mathrm{E}}, g_{Y_\mathrm{E}},
+g_{J_\mathrm{E}}, g_{H_\mathrm{E}})\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[\vec{S}_C = \frac{\vec{C} \cdot \vec{g}}{\|\vec{C}\|\,\|\vec{g}\|}
+         = \frac{\sum_b C_b\,g_b}
+                {\sqrt{\sum_b C_b^2}\,\sqrt{\sum_b g_b^2}} \,,\]</div>
+<p>where <span class="math notranslate nohighlight">\(b\)</span> runs over the four <em>Euclid</em> photometric bands and
+<span class="math notranslate nohighlight">\(\vec{C}\)</span> is the per-pixel colour vector.  Sources whose median
+cosine similarity differs from the galaxy’s own value by more than
+<span class="math notranslate nohighlight">\(3\,\sigma_{\vec{g}}\)</span> are flagged as external contaminants and masked.</p>
+</li>
+<li><p><strong>Colour outlier masking</strong>: pixels within the galaxy footprint that deviate
+by more than <span class="math notranslate nohighlight">\(5\,\sigma_{\vec{g}}\)</span> in colour space (typically
+high-redshift point sources not resolved by MTObjects) are morphologically
+eroded and dilated, and regions larger than FWHM² pixels are masked.
+The central 20 % of each galaxy segment is always left unmasked.</p></li>
+</ol>
+<figure class="align-center" id="id11">
+<a class="reference internal image-reference" href="figures/EUC_SEGMID_-612927984481008950_mask_segment.pdf"><img alt="Mask comparison for EUCL J040510.27−444836.3" src="figures/EUC_SEGMID_-612927984481008950_mask_segment.pdf" style="width: 95%;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><em>Mask comparison for EUCL J040510.27−444836.3.  Top row (left to right):
+LRGB image, cosine similarity map (:math:`vec{S}_C`), MER segmentation map,
+and watershed output.  Bottom row (left to right): NoiseChisel+Segment,
+MTObjects, cosine similarity regions, and the final combined mask.</em></span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="output-files">
+<h3>Output files<a class="headerlink" href="#output-files" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">EUC_SEGMID_&lt;id&gt;_VIS_cutout.fits</span></code></p></td>
+<td><p>VIS cutout with MER background added (BGMOD=1 in header)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">EUC_SEGMID_&lt;id&gt;_&lt;band&gt;_cutout.fits</span></code></p></td>
+<td><p>One cutout per band</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">EUC_SEGMAP_&lt;id&gt;_segmap.fits</span></code></p></td>
+<td><p>MER segmentation map cutout</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">EUC_SEGMID_&lt;id&gt;_mask.fits</span></code></p></td>
+<td><p>Final contamination mask (0 = valid, non-zero = masked)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The function returns updated (RA, Dec) coordinates that reflect the refined
+centre and should be passed to all downstream modules.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Pipeline Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="module2.html" class="btn btn-neutral float-right" title="Module 2 – Position Angle and Ellipticity Profiles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Euclid Collaboration.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

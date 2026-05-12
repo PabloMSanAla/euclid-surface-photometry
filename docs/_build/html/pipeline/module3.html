@@ -1,0 +1,263 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 3 – Sky Background and Surface Brightness Profiles &mdash; Euclid Surface Photometry Pipeline 0.1.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=92734c54"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"macros": {"IE": "I_\\mathrm{E}", "YE": "Y_\\mathrm{E}", "JE": "J_\\mathrm{E}", "HE": "H_\\mathrm{E}"}}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 4 – Derived Photometric Parameters" href="module4.html" />
+    <link rel="prev" title="Module 2 – Position Angle and Ellipticity Profiles" href="module2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Euclid Surface Photometry Pipeline
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../science.html">Scientific Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Pipeline Overview</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#data-flow">Data flow</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="module1.html">Module 1 – Cutouts and Masks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="module2.html">Module 2 – Position Angle and Ellipticity Profiles</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Module 3 – Sky Background and Surface Brightness Profiles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#euclid_pipelines.euclid_module3"><code class="docutils literal notranslate"><span class="pre">euclid_module3()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scientific-description">Scientific description</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="module4.html">Module 4 – Derived Photometric Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="module5.html">Module 5 – Disc Break Classification</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Euclid Surface Photometry Pipeline</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Pipeline Overview</a></li>
+      <li class="breadcrumb-item active">Module 3 – Sky Background and Surface Brightness Profiles</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pipeline/module3.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-3-sky-background-and-surface-brightness-profiles">
+<span id="module3"></span><h1>Module 3 – Sky Background and Surface Brightness Profiles<a class="headerlink" href="#module-3-sky-background-and-surface-brightness-profiles" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.euclid_module3">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">euclid_module3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maskFile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#euclid_module3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.euclid_module3" title="Link to this definition"></a></dt>
+<dd><p>Euclid Pipeline 3.
+Read master profile and measure it for the different bands.</p>
+<p>Result file: EUC_SEGMID_{object_id}_profiles.csv</p>
+<dl class="simple">
+<dt>&#64;TODO:</dt><dd><p>Once the maximum radius if measured, crop the array
+alocated in memory prior to give it to the function
+to measure the profile. We need to be sure that
+the center lays in a pixel.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>object_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Euclid’s object ID of the source</p></li>
+<li><p><strong>master</strong> (<em>Table</em>) – Master profile of the source [from autoprof]</p></li>
+<li><p><strong>maskFile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to the mask file</p></li>
+<li><p><strong>pixelscale</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Pixel scale of the image in arcsec/pixel</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>table</strong> – Table with the profiles of the source in different bands</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Table</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="scientific-description">
+<h2>Scientific description<a class="headerlink" href="#scientific-description" title="Link to this heading"></a></h2>
+<p>Module 3 performs two tasks in sequence:</p>
+<ol class="arabic simple">
+<li><p>Determine the <strong>sky background level</strong> and the <strong>maximum profile radius</strong>
+<span class="math notranslate nohighlight">\(R_\mathrm{max}\)</span> for each band.</p></li>
+<li><p>Extract <strong>surface brightness profiles</strong> in all available bands using the
+elliptical geometry from M2.</p></li>
+</ol>
+<section id="sky-background-and-profile-extension">
+<h3>Sky background and profile extension<a class="headerlink" href="#sky-background-and-profile-extension" title="Link to this heading"></a></h3>
+<p>The sky background cannot be determined from a fixed aperture because the
+relevant radial extent varies from galaxy to galaxy.  The following adaptive
+method is used.</p>
+<p><strong>Step 1 — Fixed elliptical intensity profile.</strong>
+The outer PA and ellipticity are fixed to the median of the outermost five
+isophotes from the M2 profile.  An intensity profile <span class="math notranslate nohighlight">\(I_b(r)\)</span> is
+measured in elliptical annuli out to the edge of each cutout.</p>
+<p><strong>Step 2 — Locating the background transition.</strong>
+For a pure exponential disc, the ratio <span class="math notranslate nohighlight">\(I_b / I^\prime_b\)</span>, where
+<span class="math notranslate nohighlight">\(I^\prime_b = \Delta I_b / \Delta r\)</span>, is constant.  When the profile
+reaches the sky background a plateau forms, <span class="math notranslate nohighlight">\(I^\prime_b\rightarrow 0\)</span>,
+causing <span class="math notranslate nohighlight">\(I_b/I^\prime_b \rightarrow \infty\)</span>.  The transition is
+identified as the first radius at which <span class="math notranslate nohighlight">\(I_b/I^\prime_b\)</span> exceeds the
+mean of the profile by more than <span class="math notranslate nohighlight">\(3\,\sigma\)</span>.  The derivative is
+estimated by a linear fit to the five adjacent profile points to suppress local
+noise, and the intensity profile <span class="math notranslate nohighlight">\(I_b\)</span> is pre-smoothed with a
+Savitzky–Golay filter (window = 5, polynomial degree = 1; <a href="#id1"><span class="problematic" id="id2">:cite:t:`SG-Filter`</span></a>
+via <a href="#id3"><span class="problematic" id="id4">:cite:t:`scipy`</span></a>) to remove high-frequency artefacts.</p>
+<p>This radius is set as <span class="math notranslate nohighlight">\(R_\mathrm{max}\)</span> for that band.</p>
+<p><strong>Step 3 — Background value and uncertainty.</strong>
+The sky value for each band is the sigma-clipped median of the unmasked pixels
+in an elliptical annulus of width <span class="math notranslate nohighlight">\(0.1\,R_\mathrm{max}\)</span> centred at
+<span class="math notranslate nohighlight">\(R_\mathrm{max}\)</span>.  Square sky boxes placed at the same distance provide
+the background uncertainty (standard deviation of box medians normalised by
+<span class="math notranslate nohighlight">\(\sqrt{N_\mathrm{boxes}}\)</span>).</p>
+<p>The maximum <span class="math notranslate nohighlight">\(R_\mathrm{max}\)</span> across all bands defines a common outer
+radius out to which the master profile is optionally extended via logarithmic
+interpolation before profile extraction.</p>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="figures/Euclid_Pipeline.pdf"><img alt="M3 panel – sky background estimation" src="figures/Euclid_Pipeline.pdf" style="width: 50%;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><em>M3 panels for EUCL J040743.76−465230.1.  Top left: VIS cutout visualised
+around the sky level, with the elliptical and square apertures used to
+measure the background.  Top right: intensity profile (grey dots = all
+pixels; red = sigma-clipped mean; green = Savitzky–Golay smoothed) and
+:math:`I_b/I_b^prime` profile below.  Bottom left: final SB profiles in
+all</em> Euclid <em>bands.  Bottom right:</em> Euclid <em>colour profiles.</em></span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="surface-brightness-profile-extraction">
+<h3>Surface brightness profile extraction<a class="headerlink" href="#surface-brightness-profile-extraction" title="Link to this heading"></a></h3>
+<p>Once <span class="math notranslate nohighlight">\(R_\mathrm{max}\)</span> and the sky backgrounds are known, surface
+brightness profiles are extracted for every available band using the
+radially varying PA and <span class="math notranslate nohighlight">\(\varepsilon\)</span> from the M2 master profile.</p>
+<p>For each elliptical annulus:</p>
+<ul class="simple">
+<li><p>The <strong>surface brightness</strong> is computed as the sigma-clipped average intensity
+of the unmasked pixels in the annulus.</p></li>
+<li><p><strong>Flux</strong> is also measured; flux lost to masked pixels is replaced by
+assigning the annulus mean surface brightness to those pixels before
+integration.</p></li>
+<li><p>Formal uncertainties are propagated from the per-pixel noise.</p></li>
+</ul>
+<p>In addition to the surface brightness and flux, the following geometric
+quantities from M2 are included in the output table: PA, <span class="math notranslate nohighlight">\(\varepsilon\)</span>,
+Fourier mode amplitudes (A2, <span class="math notranslate nohighlight">\(\Phi_2\)</span>, A4, <span class="math notranslate nohighlight">\(\Phi_4\)</span>), pixel
+centre coordinates, and number of contributing pixels per annulus.</p>
+</section>
+<section id="output-file">
+<h3>Output file<a class="headerlink" href="#output-file" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">EUC_SEGMID_&lt;id&gt;_profiles.csv</span></code></p></td>
+<td><p>ECSV table.  Columns include <code class="docutils literal notranslate"><span class="pre">sma</span></code> (semi-major axis in pixels),
+<code class="docutils literal notranslate"><span class="pre">pa</span></code>, <code class="docutils literal notranslate"><span class="pre">eps</span></code>, morphological Fourier mode coefficients, and for each
+band <code class="docutils literal notranslate"><span class="pre">&lt;b&gt;</span></code>: <code class="docutils literal notranslate"><span class="pre">int_&lt;b&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">intstd_&lt;b&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">flux_&lt;b&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">fluxstd_&lt;b&gt;</span></code>.
+Table metadata contains the sky background (<code class="docutils literal notranslate"><span class="pre">bkg_&lt;b&gt;</span></code>), background
+uncertainty (<code class="docutils literal notranslate"><span class="pre">bkgstd_&lt;b&gt;</span></code>), background radius (<code class="docutils literal notranslate"><span class="pre">bkgrad_&lt;b&gt;</span></code>),
+image zero-point (<code class="docutils literal notranslate"><span class="pre">zp_&lt;b&gt;</span></code>), and pixel scale (<code class="docutils literal notranslate"><span class="pre">pixscale_&lt;b&gt;</span></code>).</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the primary background estimation (<code class="docutils literal notranslate"><span class="pre">background_estimation_euclid</span></code>) fails
+(e.g., when the galaxy fills the cutout), the fallback is the global
+sigma-clipped statistics of the masked image.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="module2.html" class="btn btn-neutral float-left" title="Module 2 – Position Angle and Ellipticity Profiles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="module4.html" class="btn btn-neutral float-right" title="Module 4 – Derived Photometric Parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Euclid Collaboration.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

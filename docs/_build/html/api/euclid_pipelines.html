@@ -1,0 +1,966 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>euclid_pipelines &mdash; Euclid Surface Photometry Pipeline 0.1.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=92734c54"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="euclid_profile_pipeline_pool" href="euclid_profile_pipeline_pool.html" />
+    <link rel="prev" title="API Reference" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Euclid Surface Photometry Pipeline
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../science.html">Scientific Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pipeline/index.html">Pipeline Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">euclid_pipelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.savefits"><code class="docutils literal notranslate"><span class="pre">savefits()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.euclid_module1"><code class="docutils literal notranslate"><span class="pre">euclid_module1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.euclid_module2"><code class="docutils literal notranslate"><span class="pre">euclid_module2()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.euclid_module3"><code class="docutils literal notranslate"><span class="pre">euclid_module3()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.euclid_module4"><code class="docutils literal notranslate"><span class="pre">euclid_module4()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.euclid_module5"><code class="docutils literal notranslate"><span class="pre">euclid_module5()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.euclid_mask"><code class="docutils literal notranslate"><span class="pre">euclid_mask()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.cosine_similarity_image"><code class="docutils literal notranslate"><span class="pre">cosine_similarity_image()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.rgb_euclid"><code class="docutils literal notranslate"><span class="pre">rgb_euclid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.LSBrgb_euclid"><code class="docutils literal notranslate"><span class="pre">LSBrgb_euclid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.create_ellipse_meshgrid"><code class="docutils literal notranslate"><span class="pre">create_ellipse_meshgrid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.create_matrix_by_bins"><code class="docutils literal notranslate"><span class="pre">create_matrix_by_bins()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.elliptical_profile_fast"><code class="docutils literal notranslate"><span class="pre">elliptical_profile_fast()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.background_estimation_euclid_old"><code class="docutils literal notranslate"><span class="pre">background_estimation_euclid_old()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.euclid_pipeline_tile_masking"><code class="docutils literal notranslate"><span class="pre">euclid_pipeline_tile_masking()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.exponential_disc_sb"><code class="docutils literal notranslate"><span class="pre">exponential_disc_sb()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.bar_profile_sb"><code class="docutils literal notranslate"><span class="pre">bar_profile_sb()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.broken_exponential_sb"><code class="docutils literal notranslate"><span class="pre">broken_exponential_sb()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.break_type_string"><code class="docutils literal notranslate"><span class="pre">break_type_string()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.sersic_sb"><code class="docutils literal notranslate"><span class="pre">sersic_sb()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.loss"><code class="docutils literal notranslate"><span class="pre">loss()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.mask_cmap"><code class="docutils literal notranslate"><span class="pre">mask_cmap()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.ellipse_points"><code class="docutils literal notranslate"><span class="pre">ellipse_points()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.rectangle_add_patches"><code class="docutils literal notranslate"><span class="pre">rectangle_add_patches()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.make_serializable"><code class="docutils literal notranslate"><span class="pre">make_serializable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.write_pickle"><code class="docutils literal notranslate"><span class="pre">write_pickle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.write_yaml"><code class="docutils literal notranslate"><span class="pre">write_yaml()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.eucl_name_formater"><code class="docutils literal notranslate"><span class="pre">eucl_name_formater()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.savitzky_golay_with_padding"><code class="docutils literal notranslate"><span class="pre">savitzky_golay_with_padding()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.redshift_surface_brightness_dimming"><code class="docutils literal notranslate"><span class="pre">redshift_surface_brightness_dimming()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.disc_weights"><code class="docutils literal notranslate"><span class="pre">disc_weights()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.multiple_exponential_discs"><code class="docutils literal notranslate"><span class="pre">multiple_exponential_discs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.multicomponent_model_piecewise"><code class="docutils literal notranslate"><span class="pre">multicomponent_model_piecewise()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.multicomponent_model"><code class="docutils literal notranslate"><span class="pre">multicomponent_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.normalized_sigmoid"><code class="docutils literal notranslate"><span class="pre">normalized_sigmoid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.MultiComponentModel"><code class="docutils literal notranslate"><span class="pre">MultiComponentModel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#euclid_pipelines.MultiComponentModel.function_to_fitter"><code class="docutils literal notranslate"><span class="pre">MultiComponentModel.function_to_fitter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#euclid_pipelines.MultiComponentModel.update_params"><code class="docutils literal notranslate"><span class="pre">MultiComponentModel.update_params()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#euclid_pipelines.MultiComponentModel.get_components"><code class="docutils literal notranslate"><span class="pre">MultiComponentModel.get_components()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#euclid_pipelines.MultiComponentModel.get_dictionary"><code class="docutils literal notranslate"><span class="pre">MultiComponentModel.get_dictionary()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#euclid_pipelines.euclid_to_besta"><code class="docutils literal notranslate"><span class="pre">euclid_to_besta()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="euclid_profile_pipeline_pool.html">euclid_profile_pipeline_pool</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Euclid Surface Photometry Pipeline</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API Reference</a></li>
+      <li class="breadcrumb-item active">euclid_pipelines</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/euclid_pipelines.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="euclid-pipelines">
+<span id="api-euclid-pipelines"></span><h1>euclid_pipelines<a class="headerlink" href="#euclid-pipelines" title="Link to this heading"></a></h1>
+<p>This module implements all five pipeline modules and ancillary helper functions
+used in the Euclid surface photometry pipeline.</p>
+<dl class="py function" id="module-euclid_pipelines">
+<dt class="sig sig-object py" id="euclid_pipelines.savefits">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">savefits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keywords</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#savefits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.savefits" title="Link to this definition"></a></dt>
+<dd><p>Save fits file adding new keywords in header</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.euclid_module1">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">euclid_module1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ra</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inPath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outPath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addMERback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#euclid_module1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.euclid_module1" title="Link to this definition"></a></dt>
+<dd><p>Euclid Pipeline 1.
+Given an object ID of Euclid, create a cutout of 5xkron_radius, and
+gerenates a mask for that source using Euclid SEGMENT, NoiseChisel and
+MTObjecst for deblending sources inside the galaxy.</p>
+<p>Fortmat of cutout: EUC_SEGMID-{object_id}_cutout.fits
+Fortmat of mask:   EUC_SEGMID-{object_id}_mask.fits</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>object_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Euclid’s object ID of the source</p></li>
+<li><p><strong>ra</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Right Ascension of the source</p></li>
+<li><p><strong>dec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Declination of the source</p></li>
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Size of the cutout in degrees</p></li>
+<li><p><strong>inPath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to the input data (MER mosaics)</p></li>
+<li><p><strong>outPath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to save the cutout and mask</p></li>
+<li><p><strong>addMerBack</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a>) – If True, add the MER background to the cutout.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>cutoutFile</strong> (<em>str</em>) – Path to the cutout file</p></li>
+<li><p><strong>maskFile</strong> (<em>str</em>) – Path to the mask file</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.euclid_module2">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">euclid_module2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cutoutFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maskFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ra</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#euclid_module2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.euclid_module2" title="Link to this definition"></a></dt>
+<dd><p>Euclid Pipeline 2:
+Measure the profile of the galaxy in the VIS band to
+have the master profile to measure in all images.</p>
+<p>Result file: EUC_SEGMID-{object_id}_master-profile.fits</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cutoutFile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to the VIS cutout file</p></li>
+<li><p><strong>maskFile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to the mask file</p></li>
+<li><p><strong>ra</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Right Ascension of the source</p></li>
+<li><p><strong>dec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Declination of the source</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>result</strong> – Table with the master profile of the source</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Table</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.euclid_module3">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">euclid_module3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">master</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maskFile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#euclid_module3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.euclid_module3" title="Link to this definition"></a></dt>
+<dd><p>Euclid Pipeline 3.
+Read master profile and measure it for the different bands.</p>
+<p>Result file: EUC_SEGMID_{object_id}_profiles.csv</p>
+<dl class="simple">
+<dt>&#64;TODO:</dt><dd><p>Once the maximum radius if measured, crop the array
+alocated in memory prior to give it to the function
+to measure the profile. We need to be sure that
+the center lays in a pixel.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>object_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Euclid’s object ID of the source</p></li>
+<li><p><strong>master</strong> (<em>Table</em>) – Master profile of the source [from autoprof]</p></li>
+<li><p><strong>maskFile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to the mask file</p></li>
+<li><p><strong>pixelscale</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Pixel scale of the image in arcsec/pixel</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>table</strong> – Table with the profiles of the source in different bands</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Table</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.euclid_module4">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">euclid_module4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profiles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outPath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#euclid_module4"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.euclid_module4" title="Link to this definition"></a></dt>
+<dd><p>Euclid Pipeline 4.
+Measure the resolved photometry on the surface brightness profiles of different bands.</p>
+<p>Result file: EUC_SEGMID_{object_id}_photometry.csv</p>
+<dl class="simple">
+<dt>TODO:</dt><dd><ul class="simple">
+<li><p>Add SB limit like when reaching 1 sigma error.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>profiles</strong> (<em>Table</em>) – Table with the profiles of the source in different bands</p></li>
+<li><p><strong>object_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Euclid’s object ID of the source</p></li>
+<li><p><strong>outPath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to save the photometry</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>done</strong> – Success status of the pipeline</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.euclid_module5">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">euclid_module5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profiles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">photometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outPath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sb_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#euclid_module5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.euclid_module5" title="Link to this definition"></a></dt>
+<dd><p>Euclid Pipeline 5.
+Given the surface brightness profiles and the photometry of the source,
+classify the breaks in the profile and measure the parameters of the galaxy models.</p>
+<p>Result file: EUC_SEGMID_{object_id}_breaks.csv</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>profiles</strong> (<em>Table</em>) – Table with the profiles of the source in different bands</p></li>
+<li><p><strong>photometry</strong> (<em>Table</em>) – Table with the photometry of the source in different bands</p></li>
+<li><p><strong>object_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Euclid’s object ID of the source</p></li>
+<li><p><strong>outPath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to save the breaks</p></li>
+<li><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Redshift of the source to apply threshold</p></li>
+<li><p><strong>sb_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Surface brightness threshold at z=0 to apply to the profile</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>breaks</strong> – Table with the parameters of the models fitted.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Table</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.euclid_mask">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">euclid_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outPath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fwhm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#euclid_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.euclid_mask" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.cosine_similarity_image">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">cosine_similarity_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#cosine_similarity_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.cosine_similarity_image" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.rgb_euclid">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">rgb_euclid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">abspath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#rgb_euclid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.rgb_euclid" title="Link to this definition"></a></dt>
+<dd><p>cr
+Create an RGB image for an Euclid galaxy using their object ID</p>
+<section id="parameters">
+<h2>PARAMETERS:<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>object_id: str</dt><dd><p>ID of the object in the Euclid database</p>
+</dd>
+<dt>verbose: bool</dt><dd><p>Print information about the image</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="returns">
+<h2>RETURNS:<a class="headerlink" href="#returns" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>enhanced_img: np.array</dt><dd><p>RGB image of the galaxy</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.LSBrgb_euclid">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">LSBrgb_euclid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">abspath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#LSBrgb_euclid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.LSBrgb_euclid" title="Link to this definition"></a></dt>
+<dd><p>Create an RGB image LSB style for an Euclid galaxy using their object ID</p>
+<section id="id1">
+<h2>PARAMETERS:<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>object_id: str</dt><dd><p>ID of the object in the Euclid database</p>
+</dd>
+<dt>mask: np.array</dt><dd><p>Mask of the image to use to characterize the noise in the image</p>
+</dd>
+<dt>abspath: str</dt><dd><p>Absolute path to the directory where the FITS files are located</p>
+</dd>
+<dt>verbose: bool</dt><dd><p>Print information about the image</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id2">
+<h2>RETURNS:<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>enhanced_img: np.array</dt><dd><p>RGB image of the galaxy</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.create_ellipse_meshgrid">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">create_ellipse_meshgrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_shape</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#create_ellipse_meshgrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.create_ellipse_meshgrid" title="Link to this definition"></a></dt>
+<dd><p>Create meshgrid of semimajor axis following an elliptical shape.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><p>eps (float): Ellipticity of the ellipse (0 &lt;= e &lt; 1).
+pa (float): Position angle of the ellipse in degrees (counterclockwise from x-axis).
+center (tuple): Center of the ellipse (cx, cy).
+grid_shape (tuple): Shape of the meshgrid (height, width).</p>
+</dd>
+<dt>Returns:</dt><dd><p>x_coords (2D array): X-coordinates of the meshgrid.
+y_coords (2D array): Y-coordinates of the meshgrid.
+mask (2D array): Boolean mask where <cite>True</cite> indicates points inside the ellipse.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.create_matrix_by_bins">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">create_matrix_by_bins</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#create_matrix_by_bins"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.create_matrix_by_bins" title="Link to this definition"></a></dt>
+<dd><p>Create a matrix z where each row contains values of y corresponding to ranges of x given by bins.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array</em>) – x-axis values.</p></li>
+<li><p><strong>y</strong> (<em>array</em>) – y-axis values.</p></li>
+<li><p><strong>bins</strong> (<em>array</em>) – Bin edges.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>z</strong> – Matrix where each row contains the values of y corresponding to each bin of x.
+Rows with no values in the bin will be padded with NaN.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.elliptical_profile_fast">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">elliptical_profile_fast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#elliptical_profile_fast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.elliptical_profile_fast" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.background_estimation_euclid_old">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">background_estimation_euclid_old</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pa</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">growth_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.04</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1234323</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#background_estimation_euclid_old"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.background_estimation_euclid_old" title="Link to this definition"></a></dt>
+<dd><p>Estimate background</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.euclid_pipeline_tile_masking">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">euclid_pipeline_tile_masking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maskFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#euclid_pipeline_tile_masking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.euclid_pipeline_tile_masking" title="Link to this definition"></a></dt>
+<dd><p>Euclid Pipeline 0:
+Run NoiseChisel on the additon of the VIS and NISP images mosaics.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.exponential_disc_sb">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">exponential_disc_sb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#exponential_disc_sb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.exponential_disc_sb" title="Link to this definition"></a></dt>
+<dd><p>Exponential disc in a surface brightness profile</p>
+<section id="id3">
+<h2>Parameters:<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>r<span class="classifier">float</span></dt><dd><p>Radius in arcsec</p>
+</dd>
+<dt>mu_0<span class="classifier">float</span></dt><dd><p>Central surface brightness in mag/arcsec^2</p>
+</dd>
+<dt>h<span class="classifier">float</span></dt><dd><p>Scale length in arcsec</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id4">
+<h2>Returns:<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>mu<span class="classifier">float</span></dt><dd><p>Surface brightness at radius r</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.bar_profile_sb">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">bar_profile_sb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_bar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#bar_profile_sb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.bar_profile_sb" title="Link to this definition"></a></dt>
+<dd><p>Broken exponential in a  surface brightness profile
+following  Sánchez-Menguiano, L + 2017
+(DOI: 10.1051/0004-6361/201731486)</p>
+<section id="id5">
+<h2>Parameters:<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>r<span class="classifier">float</span></dt><dd><p>Radius in arcsec</p>
+</dd>
+<dt>mu_1<span class="classifier">float</span></dt><dd><p>Surface brightness at r=0 of first profile</p>
+</dd>
+<dt>h_1<span class="classifier">float</span></dt><dd><p>Scale length at r=0 (slope of first profile)</p>
+</dd>
+<dt>r_break<span class="classifier">float</span></dt><dd><p>Position of the break in arcsec</p>
+</dd>
+<dt>h_2<span class="classifier">float</span></dt><dd><p>Scale length at r=0 (slope of second profile)</p>
+</dd>
+<dt>beta<span class="classifier">float</span></dt><dd><p>Transition parameter (default 1e-8)</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id6">
+<h2>Returns:<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>mu<span class="classifier">float</span></dt><dd><p>Surface brightness at radius r</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.broken_exponential_sb">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">broken_exponential_sb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_break</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#broken_exponential_sb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.broken_exponential_sb" title="Link to this definition"></a></dt>
+<dd><p>Broken exponential in a  surface brightness profile
+following  Sánchez-Menguiano, L + 2017
+(DOI: 10.1051/0004-6361/201731486)</p>
+<section id="id7">
+<h2>Parameters:<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>r<span class="classifier">float</span></dt><dd><p>Radius in arcsec</p>
+</dd>
+<dt>mu_1<span class="classifier">float</span></dt><dd><p>Surface brightness at r=0 of first profile</p>
+</dd>
+<dt>h_1<span class="classifier">float</span></dt><dd><p>Scale length at r=0 (slope of first profile)</p>
+</dd>
+<dt>r_break<span class="classifier">float</span></dt><dd><p>Position of the break in arcsec</p>
+</dd>
+<dt>h_2<span class="classifier">float</span></dt><dd><p>Scale length at r=0 (slope of second profile)</p>
+</dd>
+<dt>beta<span class="classifier">float</span></dt><dd><p>Transition parameter (default 1e-8)</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id8">
+<h2>Returns:<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>mu<span class="classifier">float</span></dt><dd><p>Surface brightness at radius r</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.break_type_string">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">break_type_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#break_type_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.break_type_string" title="Link to this definition"></a></dt>
+<dd><p>Given the number of the classification
+convert to string format.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.sersic_sb">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">sersic_sb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu_e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_e</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#sersic_sb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.sersic_sb" title="Link to this definition"></a></dt>
+<dd><p>Sersic profile in surface brightness units</p>
+<section id="id9">
+<h2>Parameters:<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>r<span class="classifier">float</span></dt><dd><p>Radius in arcsec</p>
+</dd>
+<dt>mu_e<span class="classifier">float</span></dt><dd><p>Surface brightness at r_e</p>
+</dd>
+<dt>r_e<span class="classifier">float</span></dt><dd><p>Effective radius in arcsec</p>
+</dd>
+<dt>n<span class="classifier">float</span></dt><dd><p>Sersic index</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id10">
+<h2>Returns:<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>mu<span class="classifier">float</span></dt><dd><p>Surface brightness at radius r</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.loss">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.loss" title="Link to this definition"></a></dt>
+<dd><p>Loss function for fitting a broken exponential profile
+to a surface brightness profile</p>
+<section id="id11">
+<h2>Parameters:<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>p<span class="classifier">list</span></dt><dd><p>Parameters of the model [mu_1, h_1, r_break, h_2]</p>
+</dd>
+<dt>r<span class="classifier">array</span></dt><dd><p>Radii in arcsec</p>
+</dd>
+<dt>y<span class="classifier">array</span></dt><dd><p>Surface brightness in mag/arcsec^2</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id12">
+<h2>Returns:<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>loss<span class="classifier">float</span></dt><dd><p>Loss value</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.mask_cmap">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">mask_cmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'red'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#mask_cmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.mask_cmap" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.ellipse_points">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">ellipse_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_points</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#ellipse_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.ellipse_points" title="Link to this definition"></a></dt>
+<dd><p>Generate x and y coordinates for an ellipse.</p>
+<p>Parameters:
+center (tuple): (x, y) coordinates of the ellipse center.
+a (float): Semimajor axis.
+b (float): Semiminor axis.
+angle (float): Rotation angle in degrees.
+num_points (int): Number of points to generate.</p>
+<p>Returns:
+tuple: (x, y) coordinates of the ellipse.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.rectangle_add_patches">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">rectangle_add_patches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#rectangle_add_patches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.rectangle_add_patches" title="Link to this definition"></a></dt>
+<dd><p>Add rectangles patches to axis</p>
+<section id="id13">
+<h2>Parameters:<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>coord: array</dt><dd><p>Array of coordinates (x,y) of the center of the rectangles</p>
+</dd>
+<dt>width: float</dt><dd><p>Width of the rectangles in pixels</p>
+</dd>
+<dt>height: float</dt><dd><p>Height of the rectangles in pixels</p>
+</dd>
+<dt>ax: matplotlib axis</dt><dd><p>Axis to add the patches</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id14">
+<h2>Returns:<a class="headerlink" href="#id14" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>True: bool</dt><dd><p>True if the rectangles were added to the axis</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.make_serializable">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">make_serializable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#make_serializable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.make_serializable" title="Link to this definition"></a></dt>
+<dd><p>Recursively convert non-serializable objects to YAML-compatible types.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.write_pickle">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">write_pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#write_pickle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.write_pickle" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.write_yaml">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">write_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#write_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.write_yaml" title="Link to this definition"></a></dt>
+<dd><p>Save a dictionary to a YAML file, ensuring all data is YAML-serializable.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (dict): The dictionary to save.
+file_path (str): The path to the YAML file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.eucl_name_formater">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">eucl_name_formater</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ra</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dec</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#eucl_name_formater"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.eucl_name_formater" title="Link to this definition"></a></dt>
+<dd><p>Given the RA and DEC of a source returns
+the name formatted to Euclid standards, following IAU convention.</p>
+<section id="id15">
+<h2>Parameters:<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>ra (float):</dt><dd><p>Right Ascension in degrees</p>
+</dd>
+<dt>dec (float):</dt><dd><p>Declination in degrees</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id16">
+<h2>Returns:<a class="headerlink" href="#id16" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>text (str):</dt><dd><p>Name formatted to Euclid standards in LaTeX</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.savitzky_golay_with_padding">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">savitzky_golay_with_padding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polyorder</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#savitzky_golay_with_padding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.savitzky_golay_with_padding" title="Link to this definition"></a></dt>
+<dd><p>Applies the Savitzky-Golay filter to a 1D array with padding to avoid edge effects.</p>
+<p>Parameters:
+- array: np.ndarray, the input 1D signal.
+- window_length: int, the length of the filter window (must be odd and &gt;= polyorder + 2).
+- polyorder: int, the order of the polynomial to fit.</p>
+<p>Returns:
+- smoothed_array: np.ndarray, the smoothed signal with the same length as the input.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.redshift_surface_brightness_dimming">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">redshift_surface_brightness_dimming</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#redshift_surface_brightness_dimming"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.redshift_surface_brightness_dimming" title="Link to this definition"></a></dt>
+<dd><p>Calculate the surface brightness dimming to current redshift.
+Surface density scales as (1+z)^-3 so the surface brightness scales as
+7.5xlog10(1+z).</p>
+<p>The rest frame mu_rest = mu_observed + dimming</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Redshift of the source</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>dimming</strong> – Surface brightness dimming in magnitudes</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.disc_weights">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">disc_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rbreaks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#disc_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.disc_weights" title="Link to this definition"></a></dt>
+<dd><p>Function to generate the softening function for the breaks in the disc</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r</strong> (<em>array-like</em>) – The radii at which the softening function will be computed</p></li>
+<li><p><strong>rbreaks</strong> (<em>array-like</em>) – The radii at which the scale length changes</p></li>
+<li><p><strong>beta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – The softening parameter</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Wb</strong> – The weights for each disc components</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.multiple_exponential_discs">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">multiple_exponential_discs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rbreaks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modelsOut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#multiple_exponential_discs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.multiple_exponential_discs" title="Link to this definition"></a></dt>
+<dd><p>Function to generate multiple exponentials discs
+in surface brightness units (mag arcsec^-2)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r</strong> (<em>array-like</em>) – The radii at which the surface brightness will be computed</p></li>
+<li><p><strong>mu0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – The central surface brightness of the first component disc</p></li>
+<li><p><strong>h</strong> (<em>array-like</em>) – The scale lengths of the disc components</p></li>
+<li><p><strong>rbreaks</strong> (<em>array-like</em>) – The radii at which the scale length changes</p></li>
+<li><p><strong>modelsOut</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the function will return the surface brightness of each disc
+component as well as the total surface brightness. Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>mu</strong> – The surface brightness profile</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.multicomponent_model_piecewise">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">multicomponent_model_piecewise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">re</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rbreaks</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#multicomponent_model_piecewise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.multicomponent_model_piecewise" title="Link to this definition"></a></dt>
+<dd><p>Function to generate a multi-component model
+with Sersic bulge and multiple exponential discs</p>
+<section id="id17">
+<h2>Parameters:<a class="headerlink" href="#id17" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>r<span class="classifier">array-like</span></dt><dd><p>The radii at which the surface brightness will be computed</p>
+</dd>
+<dt>mue<span class="classifier">float</span></dt><dd><p>Surface brightness at the effective radius</p>
+</dd>
+<dt>re<span class="classifier">float</span></dt><dd><p>Effective radius in units of r</p>
+</dd>
+<dt>n<span class="classifier">float</span></dt><dd><p>Sersic index</p>
+</dd>
+<dt>mu0<span class="classifier">float</span></dt><dd><p>Central surface brightness of the first disc component</p>
+</dd>
+<dt>h<span class="classifier">float or array-like</span></dt><dd><p>The scale lengths of the disc components</p>
+</dd>
+<dt>rbreaks<span class="classifier">float or array-like</span></dt><dd><p>The radii at which the scale length changes</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id18">
+<h2>Returns:<a class="headerlink" href="#id18" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>mu<span class="classifier">array-like</span></dt><dd><p>The surface brightness</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.multicomponent_model">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">multicomponent_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">re</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rbreaks</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#multicomponent_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.multicomponent_model" title="Link to this definition"></a></dt>
+<dd><p>Function to generate a multi-component model
+with a bulge modeled by a Sersic and multiple exponential discs</p>
+<section id="id19">
+<h2>Parameters:<a class="headerlink" href="#id19" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>r<span class="classifier">array-like</span></dt><dd><p>The radii at which the surface brightness will be computed</p>
+</dd>
+<dt>mue<span class="classifier">float</span></dt><dd><p>Surface brightness at the effective radius</p>
+</dd>
+<dt>re<span class="classifier">float</span></dt><dd><p>Effective radius in units of r</p>
+</dd>
+<dt>n<span class="classifier">float</span></dt><dd><p>Sersic index</p>
+</dd>
+<dt>mu0<span class="classifier">float</span></dt><dd><p>Central surface brightness of the first disc component</p>
+</dd>
+<dt>h<span class="classifier">float or array-like</span></dt><dd><p>The scale lengths of the disc components</p>
+</dd>
+<dt>rbreaks<span class="classifier">float or array-like</span></dt><dd><p>The radii at which the scale length changes</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id20">
+<h2>Returns:<a class="headerlink" href="#id20" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>mu<span class="classifier">array-like</span></dt><dd><p>The surface brightness</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.normalized_sigmoid">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">normalized_sigmoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#normalized_sigmoid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.normalized_sigmoid" title="Link to this definition"></a></dt>
+<dd><p>Normalized sigmoid function.</p>
+<section id="id21">
+<h2>Parameters:<a class="headerlink" href="#id21" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>x<span class="classifier">float or array-like</span></dt><dd><p>Input value(s).</p>
+</dd>
+</dl>
+</section>
+<section id="id22">
+<h2>Returns:<a class="headerlink" href="#id22" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>float or array-like</dt><dd><p>Normalized sigmoid output between 0 and 1.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="euclid_pipelines.MultiComponentModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">MultiComponentModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">re</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rbreaks</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#MultiComponentModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.MultiComponentModel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Class to generate a multi-component model
+with a bulge modeled by a Sersic and multiple exponential discs</p>
+<section id="attributes">
+<h2>Attributes:<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
+<blockquote>
+<div><dl class="simple">
+<dt>mue<span class="classifier">float</span></dt><dd><p>Surface brightness at the effective radius</p>
+</dd>
+<dt>re<span class="classifier">float</span></dt><dd><p>Effective radius in units of r</p>
+</dd>
+<dt>n<span class="classifier">float</span></dt><dd><p>Sersic index</p>
+</dd>
+<dt>mu0<span class="classifier">float</span></dt><dd><p>Central surface brightness of the first disc component</p>
+</dd>
+<dt>h<span class="classifier">float or array-like</span></dt><dd><p>The scale lengths of the disc components</p>
+</dd>
+<dt>rbreaks<span class="classifier">float or array-like</span></dt><dd><p>The radii at which the scale length changes</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="methods">
+<h2>Methods:<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>__call__(r) : Generates the multi-component model</p>
+<p>function_to_fitter(r, <a href="#id23"><span class="problematic" id="id24">*</span></a>params) : Funtction to provide to curve_fit</p>
+</div></blockquote>
+<dl class="py method">
+<dt class="sig sig-object py" id="euclid_pipelines.MultiComponentModel.function_to_fitter">
+<span class="sig-name descname"><span class="pre">function_to_fitter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#MultiComponentModel.function_to_fitter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.MultiComponentModel.function_to_fitter" title="Link to this definition"></a></dt>
+<dd><p>Function to provide to curve fit to fit the
+multi-component model to the data. The parameters
+are passed as a list, and the function returns the
+model surface brightness profile.</p>
+<p>The parameters are:
+[sersic_mu, sersic_r_e, sersic_n, mu0,</p>
+<blockquote>
+<div><p>h1, h2, …, rbreaks1, rbreaks2, …]</p>
+</div></blockquote>
+<section id="id25">
+<h3>Parameters:<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>r<span class="classifier">array-like</span></dt><dd><p>The radii at which the surface brightness will be computed</p>
+</dd>
+<dt>params<span class="classifier">list</span></dt><dd><p>The parameters of the model. The first four are the Sersic parameters,
+and the rest are the disc parameters.</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+<section id="id26">
+<h3>Returns:<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<blockquote>
+<div><dl class="simple">
+<dt>mu<span class="classifier">array-like</span></dt><dd><p>The surface brightness profile</p>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="euclid_pipelines.MultiComponentModel.update_params">
+<span class="sig-name descname"><span class="pre">update_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#MultiComponentModel.update_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.MultiComponentModel.update_params" title="Link to this definition"></a></dt>
+<dd><p>Update the parameters of the model</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="euclid_pipelines.MultiComponentModel.get_components">
+<span class="sig-name descname"><span class="pre">get_components</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#MultiComponentModel.get_components"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.MultiComponentModel.get_components" title="Link to this definition"></a></dt>
+<dd><p>Get the disc components of the model</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="euclid_pipelines.MultiComponentModel.get_dictionary">
+<span class="sig-name descname"><span class="pre">get_dictionary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#MultiComponentModel.get_dictionary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.MultiComponentModel.get_dictionary" title="Link to this definition"></a></dt>
+<dd><p>Get the parameters of the model as a dictionary</p>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.euclid_to_besta">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">euclid_to_besta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">band</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#euclid_to_besta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.euclid_to_besta" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="euclid_profile_pipeline_pool.html" class="btn btn-neutral float-right" title="euclid_profile_pipeline_pool" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Euclid Collaboration.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

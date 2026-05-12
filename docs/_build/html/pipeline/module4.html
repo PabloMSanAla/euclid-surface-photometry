@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 4 – Derived Photometric Parameters &mdash; Euclid Surface Photometry Pipeline 0.1.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=92734c54"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"macros": {"IE": "I_\\mathrm{E}", "YE": "Y_\\mathrm{E}", "JE": "J_\\mathrm{E}", "HE": "H_\\mathrm{E}"}}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Module 5 – Disc Break Classification" href="module5.html" />
+    <link rel="prev" title="Module 3 – Sky Background and Surface Brightness Profiles" href="module3.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Euclid Surface Photometry Pipeline
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../science.html">Scientific Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Pipeline Overview</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#data-flow">Data flow</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="module1.html">Module 1 – Cutouts and Masks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="module2.html">Module 2 – Position Angle and Ellipticity Profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="module3.html">Module 3 – Sky Background and Surface Brightness Profiles</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Module 4 – Derived Photometric Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#euclid_pipelines.euclid_module4"><code class="docutils literal notranslate"><span class="pre">euclid_module4()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scientific-description">Scientific description</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="module5.html">Module 5 – Disc Break Classification</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Euclid Surface Photometry Pipeline</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Pipeline Overview</a></li>
+      <li class="breadcrumb-item active">Module 4 – Derived Photometric Parameters</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pipeline/module4.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-4-derived-photometric-parameters">
+<span id="module4"></span><h1>Module 4 – Derived Photometric Parameters<a class="headerlink" href="#module-4-derived-photometric-parameters" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.euclid_module4">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">euclid_module4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profiles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outPath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#euclid_module4"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.euclid_module4" title="Link to this definition"></a></dt>
+<dd><p>Euclid Pipeline 4.
+Measure the resolved photometry on the surface brightness profiles of different bands.</p>
+<p>Result file: EUC_SEGMID_{object_id}_photometry.csv</p>
+<dl class="simple">
+<dt>TODO:</dt><dd><ul class="simple">
+<li><p>Add SB limit like when reaching 1 sigma error.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>profiles</strong> (<em>Table</em>) – Table with the profiles of the source in different bands</p></li>
+<li><p><strong>object_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Euclid’s object ID of the source</p></li>
+<li><p><strong>outPath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to save the photometry</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>done</strong> – Success status of the pipeline</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="scientific-description">
+<h2>Scientific description<a class="headerlink" href="#scientific-description" title="Link to this heading"></a></h2>
+<p>Module 4 converts the surface brightness profiles from M3 into a set of
+physically meaningful integrated and structural parameters for each photometric
+band.  The methodology follows the <strong>S⁴G</strong> (Spitzer Survey of Stellar Structure
+in Galaxies; <a href="#id1"><span class="problematic" id="id2">:cite:t:`Seth10`</span></a>; <a href="#id3"><span class="problematic" id="id4">:cite:t:`Munoz-Mateos13`</span></a>) and <strong>CS⁴G</strong>
+(<a href="#id5"><span class="problematic" id="id6">:cite:t:`Sanchez-Alarcon25`</span></a>) pipelines.</p>
+<section id="asymptotic-magnitude">
+<h3>Asymptotic magnitude<a class="headerlink" href="#asymptotic-magnitude" title="Link to this heading"></a></h3>
+<p>Total magnitudes are derived from the <strong>curve of growth</strong> (CoG), i.e. the
+cumulative flux as a function of aperture radius.  Because the CoG does not
+always reach a true plateau (faint flux continues to accumulate), the
+asymptotic magnitude is obtained by fitting a straight line to the final,
+settling portion of the CoG and extrapolating to its y-intercept
+(<a href="#id7"><span class="problematic" id="id8">:cite:t:`Watkins22`</span></a>).</p>
+<figure class="align-center" id="id9">
+<a class="reference internal image-reference" href="figures/Euclid_Pipeline.pdf"><img alt="M4 panel – curve of growth" src="figures/Euclid_Pipeline.pdf" style="width: 45%;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><em>Left M4 panel: curve of growth for EUCL J040743.76−465230.1 used to derive
+the asymptotic magnitude in the</em> <span class="math notranslate nohighlight">\(I_\mathrm{E}\)</span> <em>band.  Right M4
+panel: comparison between our asymptotic magnitudes and the MER catalogue
+magnitudes; our method recovers on average 0.09 mag more flux.</em></span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="structural-radii">
+<h3>Structural radii<a class="headerlink" href="#structural-radii" title="Link to this heading"></a></h3>
+<p>The following radii are measured for each band:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(R_\mathrm{eff}\)</span> (<strong>reff</strong>)</p></td>
+<td><p>Half-light (effective) radius enclosing 50 % of the asymptotic flux.</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(R_{25.5}\)</span>, <span class="math notranslate nohighlight">\(R_{26.5}\)</span>, <span class="math notranslate nohighlight">\(R_{28}\)</span> (<strong>r25p5</strong>, <strong>r26p5</strong>, <strong>r28</strong>)</p></td>
+<td><p>Isophotal radii at surface brightness levels of 25.5, 26.5, and
+28 mag arcsec⁻²; also measured with inclination correction, redshift
+dimming, and both corrections combined.</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(R_\mathrm{petro}\)</span> (<strong>rpetro</strong>)</p></td>
+<td><p>Petrosian radius.</p></td>
+</tr>
+</tbody>
+</table>
+<p>At each isophotal radius the covariant PA and <span class="math notranslate nohighlight">\(\varepsilon\)</span> are also
+recorded.</p>
+</section>
+<section id="surface-brightness-at-the-effective-radius">
+<h3>Surface brightness at the effective radius<a class="headerlink" href="#surface-brightness-at-the-effective-radius" title="Link to this heading"></a></h3>
+<p>The mean surface brightness within <span class="math notranslate nohighlight">\(R_\mathrm{eff}\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[\langle \mu \rangle_\mathrm{eff} = m_\mathrm{tot} + 2.5\log_{10}(2\pi R_\mathrm{eff}^2) \,,\]</div>
+<p>where <span class="math notranslate nohighlight">\(m_\mathrm{tot}\)</span> is the asymptotic magnitude and all quantities
+are in consistent units.</p>
+</section>
+<section id="concentration-indices">
+<h3>Concentration indices<a class="headerlink" href="#concentration-indices" title="Link to this heading"></a></h3>
+<p>Two non-parametric morphology proxies are measured:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(C_{82} = 5\log_{10}(R_{80}/R_{20})\)</span> — ratio of the radii enclosing
+80 % and 20 % of the total flux.</p></li>
+<li><p><span class="math notranslate nohighlight">\(C_{31} = R_{75}/R_{25}\)</span> — ratio of the radii enclosing 75 % and 25 %.</p></li>
+</ul>
+</section>
+<section id="inclination-and-redshift-corrections">
+<h3>Inclination and redshift corrections<a class="headerlink" href="#inclination-and-redshift-corrections" title="Link to this heading"></a></h3>
+<p>Inclination-corrected radii are derived using the outer axis ratio
+<span class="math notranslate nohighlight">\((b/a) = 1 - \varepsilon_\mathrm{out}\)</span>, where <span class="math notranslate nohighlight">\(\varepsilon_\mathrm{out}\)</span>
+is the median ellipticity at radii beyond <span class="math notranslate nohighlight">\(R_{25.5}\)</span>.  The inclination
+correction applied to surface brightness is:</p>
+<div class="math notranslate nohighlight">
+\[\Delta \mu_\mathrm{incl} = -2.5\log_{10}(1 - \varepsilon_\mathrm{out}) \,.\]</div>
+<p>A redshift dimming correction <span class="math notranslate nohighlight">\(\Delta \mu_\mathrm{dim}\)</span> is also applied
+when the source redshift <span class="math notranslate nohighlight">\(z\)</span> is known.  Corrected isophotal radii are
+provided for three cases: inclination only, dimming only, and both.</p>
+</section>
+<section id="output-file">
+<h3>Output file<a class="headerlink" href="#output-file" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>File</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">EUC_SEGMID_&lt;id&gt;_photometry.csv</span></code></p></td>
+<td><p>One-row CSV with <code class="docutils literal notranslate"><span class="pre">object_id</span></code> and, for each band <code class="docutils literal notranslate"><span class="pre">&lt;b&gt;</span></code>:
+<code class="docutils literal notranslate"><span class="pre">mag_&lt;b&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">reff_&lt;b&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">sb_eff_&lt;b&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">c82_&lt;b&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">c31_&lt;b&gt;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">rpetro_&lt;b&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">r25p5_&lt;b&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">r26p5_&lt;b&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">r28_&lt;b&gt;</span></code> (plus
+<code class="docutils literal notranslate"><span class="pre">pa</span></code> and <code class="docutils literal notranslate"><span class="pre">eps</span></code> at each isophotal level and their corrected variants),
+and <code class="docutils literal notranslate"><span class="pre">axisRatio_&lt;b&gt;</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="module3.html" class="btn btn-neutral float-left" title="Module 3 – Sky Background and Surface Brightness Profiles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="module5.html" class="btn btn-neutral float-right" title="Module 5 – Disc Break Classification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Euclid Collaboration.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

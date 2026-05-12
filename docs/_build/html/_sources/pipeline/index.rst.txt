@@ -1,0 +1,89 @@
+.. _pipeline:
+
+Pipeline Overview
+=================
+
+The pipeline consists of five sequential modules (M1–M5), illustrated in the
+figure below for the galaxy EUCL J040743.76−465230.1.
+
+.. figure:: ../figures/Euclid_Pipeline.pdf
+   :alt: Five-module pipeline overview
+   :width: 98%
+   :align: center
+
+   *Illustration of each module in the automatic pipeline.  Each module is
+   represented by a header (blue boxes).  The figures below each box show
+   representative outputs: colour image and mask (M1), PA/ε profiles and
+   isophotal apertures (M2), background estimation and multi-band SB profiles
+   (M3), curve of growth and photometric comparison with MER (M4), profile
+   derivative, cumulative-sum change-point analysis, and final broken
+   exponential fit (M5).  Example galaxy: EUCL J040743.76−465230.1.*
+
+.. list-table:: Module summary
+   :header-rows: 1
+   :widths: 10 30 60
+
+   * - Module
+     - Function name
+     - Purpose
+   * - **M1**
+     - :func:`~euclid_pipelines.euclid_module1`
+     - Multi-band cutout creation, background addition, centre refinement, and
+       multi-tool contamination masking.
+   * - **M2**
+     - :func:`~euclid_pipelines.euclid_module2`
+     - Isophote-fitting of the VIS image to derive radial PA and ellipticity
+       profiles used as the master geometry for all bands.
+   * - **M3**
+     - :func:`~euclid_pipelines.euclid_module3`
+     - Adaptive sky background estimation per band, profile extent
+       determination, and multi-band SB profile extraction.
+   * - **M4**
+     - :func:`~euclid_pipelines.euclid_module4`
+     - Asymptotic magnitudes, half-light radii, isophotal radii, concentration
+       indices, axis ratios — one set per photometric band.
+   * - **M5**
+     - :func:`~euclid_pipelines.euclid_module5`
+     - Change-point detection, piecewise Sérsic + broken-exponential fitting,
+       BIC-based model selection, and disc break type classification.
+
+Data flow
+---------
+
+.. code-block:: text
+
+   Master catalogue (ra, dec, kron_radius, redshift)
+           │
+           ▼
+   ┌────────────────────────────────┐
+   │  M1 – Cutouts & Masks          │  → cutout_VIS.fits, mask.fits
+   └────────────┬───────────────────┘
+                │
+                ▼
+   ┌────────────────────────────────┐
+   │  M2 – PA / ellipticity profile │  → master-profile.csv  (PA, ε vs r)
+   └────────────┬───────────────────┘
+                │
+                ▼
+   ┌────────────────────────────────┐
+   │  M3 – Sky bkg + SB profiles    │  → profiles.csv  (μ per band vs r)
+   └────────────┬───────────────────┘
+                │
+                ▼
+   ┌────────────────────────────────┐
+   │  M4 – Photometry               │  → photometry.csv  (mag, r_eff, …)
+   └────────────┬───────────────────┘
+                │
+                ▼
+   ┌────────────────────────────────┐
+   │  M5 – Disc break classification│  → breaks.csv  (type, h_in, h_out, r_b)
+   └────────────────────────────────┘
+
+.. toctree::
+   :maxdepth: 2
+
+   module1
+   module2
+   module3
+   module4
+   module5

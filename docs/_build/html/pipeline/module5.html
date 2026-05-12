@@ -1,0 +1,388 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 5 – Disc Break Classification &mdash; Euclid Surface Photometry Pipeline 0.1.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=92734c54"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"macros": {"IE": "I_\\mathrm{E}", "YE": "Y_\\mathrm{E}", "JE": "J_\\mathrm{E}", "HE": "H_\\mathrm{E}"}}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API Reference" href="../api/index.html" />
+    <link rel="prev" title="Module 4 – Derived Photometric Parameters" href="module4.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Euclid Surface Photometry Pipeline
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../science.html">Scientific Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Pipeline Overview</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#data-flow">Data flow</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="module1.html">Module 1 – Cutouts and Masks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="module2.html">Module 2 – Position Angle and Ellipticity Profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="module3.html">Module 3 – Sky Background and Surface Brightness Profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="module4.html">Module 4 – Derived Photometric Parameters</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Module 5 – Disc Break Classification</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#euclid_pipelines.euclid_module5"><code class="docutils literal notranslate"><span class="pre">euclid_module5()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scientific-description">Scientific description</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Euclid Surface Photometry Pipeline</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Pipeline Overview</a></li>
+      <li class="breadcrumb-item active">Module 5 – Disc Break Classification</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pipeline/module5.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-5-disc-break-classification">
+<span id="module5"></span><h1>Module 5 – Disc Break Classification<a class="headerlink" href="#module-5-disc-break-classification" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="euclid_pipelines.euclid_module5">
+<span class="sig-prename descclassname"><span class="pre">euclid_pipelines.</span></span><span class="sig-name descname"><span class="pre">euclid_module5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profiles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">photometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outPath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sb_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/euclid_pipelines.html#euclid_module5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#euclid_pipelines.euclid_module5" title="Link to this definition"></a></dt>
+<dd><p>Euclid Pipeline 5.
+Given the surface brightness profiles and the photometry of the source,
+classify the breaks in the profile and measure the parameters of the galaxy models.</p>
+<p>Result file: EUC_SEGMID_{object_id}_breaks.csv</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>profiles</strong> (<em>Table</em>) – Table with the profiles of the source in different bands</p></li>
+<li><p><strong>photometry</strong> (<em>Table</em>) – Table with the photometry of the source in different bands</p></li>
+<li><p><strong>object_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Euclid’s object ID of the source</p></li>
+<li><p><strong>outPath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to save the breaks</p></li>
+<li><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Redshift of the source to apply threshold</p></li>
+<li><p><strong>sb_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Surface brightness threshold at z=0 to apply to the profile</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>breaks</strong> – Table with the parameters of the models fitted.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Table</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="scientific-description">
+<h2>Scientific description<a class="headerlink" href="#scientific-description" title="Link to this heading"></a></h2>
+<p>Module 5 classifies each galaxy’s surface brightness profile into one of
+several disc break types and fits parametric models to each disc component.
+The method is adapted from the change-point analysis of
+<a href="#id1"><span class="problematic" id="id2">:cite:t:`Watkins19`</span></a> and <a href="#id3"><span class="problematic" id="id4">:cite:t:`Sanchez-Alarcon23`</span></a>, extended with automated
+piecewise fitting and Bayesian model selection.</p>
+<section id="profile-preparation">
+<h3>Profile preparation<a class="headerlink" href="#profile-preparation" title="Link to this heading"></a></h3>
+<p>The VIS intensity profile from M3 is converted to surface brightness
+magnitudes:</p>
+<div class="math notranslate nohighlight">
+\[\mu_{I_\mathrm{E}} = \mathrm{ZP}_{I_\mathrm{E}} - 2.5\log_{10}(I_{I_\mathrm{E}})
+                    + 5\log_{10}(\mathrm{scale}) + c \,,\]</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">scale</span></code> is the pixel scale in arcsec pixel⁻¹ and the correction
+<span class="math notranslate nohighlight">\(c = c_1 + c_2\)</span> includes:</p>
+<p><strong>Redshift surface brightness dimming</strong> (<a href="#id5"><span class="problematic" id="id6">:cite:t:`Ribeiro2016`</span></a>):</p>
+<div class="math notranslate nohighlight">
+\[c_1 = -7.5\log_{10}(1+z) \,.\]</div>
+<p><strong>Inclination correction</strong> (following <a href="#id7"><span class="problematic" id="id8">:cite:t:`Sanchez-Alarcon25`</span></a>):</p>
+<div class="math notranslate nohighlight">
+\[c_2 = -2.5\log_{10}(1-\varepsilon) \,,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\varepsilon\)</span> is the median ellipticity at <span class="math notranslate nohighlight">\(\mu &gt; 25.5\)</span>
+mag arcsec⁻².</p>
+<p>A <strong>surface brightness threshold</strong> of <span class="math notranslate nohighlight">\(\mu_\mathrm{thresh} = 27.5\)</span>
+mag arcsec⁻² in the galaxy rest frame (configurable via <code class="docutils literal notranslate"><span class="pre">sb_threshold</span></code>) is
+applied to ensure a homogeneous depth across the redshift range
+<span class="math notranslate nohighlight">\(0 &lt; z &lt; 1\)</span>.  This level corresponds approximately to the <em>Euclid</em>
+sensitivity limit of ~29.5 mag arcsec⁻² observed at <span class="math notranslate nohighlight">\(z\approx 1\)</span>.</p>
+<p>The profile is additionally smoothed with a Savitzky–Golay filter (width
+adapted to 4 % of <span class="math notranslate nohighlight">\(R_\mathrm{max}\)</span> with a minimum of 5 points,
+polynomial order 1), preserving the inner region (<span class="math notranslate nohighlight">\(&lt; 1.5\)</span> arcsec) in its
+unsmoothed form.</p>
+</section>
+<section id="change-point-analysis">
+<h3>Change-point analysis<a class="headerlink" href="#change-point-analysis" title="Link to this heading"></a></h3>
+<p>The derivative of the smoothed profile, <span class="math notranslate nohighlight">\(\mu^\prime(r)\)</span>, is computed via
+local linear regression over the five adjacent profile points.  The
+weighted mean derivative <span class="math notranslate nohighlight">\(\bar{\mu}^\prime\)</span> is defined using arc-length
+weights to account for the logarithmic radial spacing:</p>
+<div class="math notranslate nohighlight">
+\[\bar{\mu}^\prime = \frac{\sum_j \mu^\prime(r_j)\,\Delta r_j}{\sum_j \Delta r_j} \,.\]</div>
+<p>The <strong>cumulative sum</strong> (CS) of <span class="math notranslate nohighlight">\((\mu^\prime - \bar{\mu}^\prime)\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{CS}_0 = 0, \quad
+\mathrm{CS}_N = \sum_{j=1}^N \left[\mu^\prime(j) - \bar{\mu}^\prime\right] \,.\]</div>
+<p>Peaks and minima of CS are detected with <code class="docutils literal notranslate"><span class="pre">scipy.signal.find_peaks</span></code>
+(minimum prominence 0.15 mag arcsec⁻³) to locate candidate break positions.
+<span class="math notranslate nohighlight">\(N_\mathrm{peaks}\)</span> breaks divide the profile into
+<span class="math notranslate nohighlight">\(N_\mathrm{peaks} + 1\)</span> regions.</p>
+<p>To isolate the outer disc, a second CS is computed after masking the inner
+region (defined by the innermost peak), using only the outermost portion of
+<span class="math notranslate nohighlight">\(\mu^\prime\)</span> to determine the weighted mean derivative.</p>
+</section>
+<section id="piecewise-model-fitting">
+<h3>Piecewise model fitting<a class="headerlink" href="#piecewise-model-fitting" title="Link to this heading"></a></h3>
+<p><strong>Inner region (Sérsic model):</strong>
+The inner region — from the centre to 110 % of the first CS peak — is always
+fitted with a Sérsic profile in mag arcsec⁻² units:</p>
+<div class="math notranslate nohighlight">
+\[\mu(r) = \mu_\mathrm{e} + \frac{2.5}{\ln 10}\,b_n
+         \left[\left(\frac{r}{R_\mathrm{e}}\right)^{1/n} - 1\right] \,,\]</div>
+<p>where <span class="math notranslate nohighlight">\(b_n\)</span> is the Sérsic shape constant, and the free parameters are
+<span class="math notranslate nohighlight">\((\mu_\mathrm{e},\, R_\mathrm{e},\, n)\)</span>.</p>
+<p><strong>Outer regions (broken or single exponential):</strong>
+For each outer region, two models are considered:</p>
+<p><em>Broken exponential</em> (<a href="#id9"><span class="problematic" id="id10">:cite:t:`2016A&amp;A...587A..70S`</span></a>):</p>
+<div class="math notranslate nohighlight">
+\[\mu(r) =
+\left(\mu_\mathrm{in} + \frac{2.5}{\ln 10}\,\frac{r}{h_\mathrm{in}}\right)(1-W_b)
++ \left(\mu_\mathrm{out}+\frac{2.5}{\ln 10}\,\frac{r}{h_\mathrm{out}}\right)W_b \,,\]</div>
+<p>with the softening weight:</p>
+<div class="math notranslate nohighlight">
+\[W_b = \frac{\pi/2 + \arctan\!\left(\frac{r - r_b}{\beta}\right)}{\pi} \,,\]</div>
+<p>and continuity condition at <span class="math notranslate nohighlight">\(r_b\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mu_\mathrm{in} + \frac{2.5}{\ln 10}\,\frac{r_b}{h_\mathrm{in}}
+= \mu_\mathrm{out} + \frac{2.5}{\ln 10}\,\frac{r_b}{h_\mathrm{out}} \,.\]</div>
+<p>The sharpness parameter is fixed at <span class="math notranslate nohighlight">\(\beta = 10^{-8}\)</span> arcsec.  The loss
+function used to fit the broken exponential adds two regularisation terms to
+the <span class="math notranslate nohighlight">\(\chi^2\)</span> to prevent degenerate solutions (identical inner and outer
+scale lengths) and breaks too close to the region boundaries:</p>
+<div class="math notranslate nohighlight">
+\[\ell = \chi^2
+       + \frac{\alpha}{(h_\mathrm{in}-h_\mathrm{out})^2+\delta}
+       + \left[\frac{\gamma}{1+e^{3(r_b-r_\mathrm{min})}}
+              +\frac{\gamma}{1+e^{2(r_\mathrm{max}-r_b)}}\right] \,,\]</div>
+<p>with <span class="math notranslate nohighlight">\(\alpha=10^{-2}\)</span>, <span class="math notranslate nohighlight">\(\delta=10^{-4}\)</span>, and <span class="math notranslate nohighlight">\(\gamma = N\)</span>
+(number of data points in the region).</p>
+<p><em>Single exponential</em>: the first term of the broken-exponential function with
+<span class="math notranslate nohighlight">\(W_b = 1\)</span> everywhere.</p>
+<p><strong>Model selection per region:</strong>
+The broken exponential is adopted only if both conditions are met:</p>
+<ol class="loweralpha">
+<li><p><span class="math notranslate nohighlight">\(|h_\mathrm{in} - h_\mathrm{out}|/\langle h \rangle &gt; 0.1\)</span> —
+the two scale lengths differ by at least 10 %  (<a href="#id11"><span class="problematic" id="id12">:cite:t:`Wang18`</span></a>;
+<a href="#id13"><span class="problematic" id="id14">:cite:t:`Yu25`</span></a>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathrm{BIC}_\mathrm{broken} &lt; \mathrm{BIC}_\mathrm{single}\)</span>, where</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{BIC} = N\ln\!\left(\chi^2/N\right) + \ln(N)\,N_\mathrm{varys} \,.\]</div>
+</li>
+</ol>
+</section>
+<section id="global-model-and-final-classification">
+<h3>Global model and final classification<a class="headerlink" href="#global-model-and-final-classification" title="Link to this heading"></a></h3>
+<p>The per-region components are assembled into a <strong>combined model</strong> (at most one
+Sérsic + up to four disc components, with continuity enforced between
+consecutive discs).  The combined model is re-fitted to the full profile with
+all free parameters initialised from the per-region fits.</p>
+<p>The combined model is accepted over a single global Sérsic fit only if its
+BIC is lower.  Profiles requiring more than four disc components are flagged as
+<strong>Null</strong>.</p>
+<p>The resulting scale lengths <span class="math notranslate nohighlight">\((h_1, h_2, h_3)\)</span> — ordered from the galaxy
+centre outward — determine the break type:</p>
+<table class="docutils align-default" id="id15">
+<caption><span class="caption-text">Break type classification</span><a class="headerlink" href="#id15" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 10.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p># discs</p></th>
+<th class="head"><p>Criterion</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0 (Sérsic only)</p></td>
+<td><p>0</p></td>
+<td><p>Single Sérsic profile; no exponential disc component</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>I</strong></p></td>
+<td><p>1</p></td>
+<td><p>Single disc; no break</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>II</strong></p></td>
+<td><p>2</p></td>
+<td><p><span class="math notranslate nohighlight">\(h_1 &gt; h_2\)</span> — down-bending (truncated)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>III</strong></p></td>
+<td><p>2</p></td>
+<td><p><span class="math notranslate nohighlight">\(h_1 &lt; h_2\)</span> — up-bending (anti-truncated)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>II+II</strong></p></td>
+<td><p>3</p></td>
+<td><p><span class="math notranslate nohighlight">\(h_1 &gt; h_2\)</span> and <span class="math notranslate nohighlight">\(h_2 &gt; h_3\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>III+III</strong></p></td>
+<td><p>3</p></td>
+<td><p><span class="math notranslate nohighlight">\(h_1 &lt; h_2\)</span> and <span class="math notranslate nohighlight">\(h_2 &lt; h_3\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>II+III</strong></p></td>
+<td><p>3</p></td>
+<td><p><span class="math notranslate nohighlight">\(h_1 &gt; h_2\)</span> and <span class="math notranslate nohighlight">\(h_2 &lt; h_3\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>III+II</strong></p></td>
+<td><p>3</p></td>
+<td><p><span class="math notranslate nohighlight">\(h_1 &lt; h_2\)</span> and <span class="math notranslate nohighlight">\(h_2 &gt; h_3\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Null</p></td>
+<td><p>&gt;3</p></td>
+<td><p>More than four components required</p></td>
+</tr>
+</tbody>
+</table>
+<p>Estimated classification accuracy is <strong>~70 %</strong> based on visual inspection of
+490 randomly selected galaxies from the reliable sample
+(<span class="math notranslate nohighlight">\(\chi^2_\nu &lt; 0.75\)</span>, <span class="math notranslate nohighlight">\(\chi^2_\mathrm{max} &lt; 7.4\)</span>).</p>
+<figure class="align-center" id="id16">
+<a class="reference internal image-reference" href="figures/Euclid_Pipeline.pdf"><img alt="M5 panel – change-point analysis and profile fit" src="figures/Euclid_Pipeline.pdf" style="width: 50%;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><em>M5 panels for EUCL J040743.76−465230.1.  Top left: :math:`mu_{I_mathrm{E}}`
+profile and its derivative :math:`mu^prime`.  Bottom left: cumulative sum
+CS with the single detected peak (after masking the inner region) used to
+define two disc regions.  Bottom right: best-fit broken exponential (Type II)
+overlaid on the observed profile.</em></span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id17">
+<a class="reference internal image-reference" href="figures/average_profiles_VIS.pdf"><img alt="Stacked profiles by disc break type" src="figures/average_profiles_VIS.pdf" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><em>Stacked normalised SB profiles for Type I, II, III, and II+III galaxies.
+Profiles are scaled to the break radius and the surface brightness at the
+break.  For Type I, the scale length and central SB are used.</em></span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="output-file">
+<h3>Output file<a class="headerlink" href="#output-file" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 55.0%" />
+<col style="width: 45.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Column group</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sersic_*</span></code></p></td>
+<td><p>Global Sérsic fit parameters (<span class="math notranslate nohighlight">\(\mu_e\)</span>, <span class="math notranslate nohighlight">\(R_e\)</span>, <span class="math notranslate nohighlight">\(n\)</span>) and χ²</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sersic_inner_*</span></code></p></td>
+<td><p>Inner-region Sérsic fit parameters and radial limits</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">disc[1|2]_*</span></code></p></td>
+<td><p>Per-region exponential/broken-exponential fit results (<code class="docutils literal notranslate"><span class="pre">broken_flag</span></code>,
+<span class="math notranslate nohighlight">\(\mu_0\)</span>, <span class="math notranslate nohighlight">\(h_0\)</span>, <span class="math notranslate nohighlight">\(r_\mathrm{break}\)</span>, <span class="math notranslate nohighlight">\(h_1\)</span>,
+BIC, BIC ratio)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">final_*</span></code></p></td>
+<td><p>Combined model parameters: <span class="math notranslate nohighlight">\(\mu_e\)</span>, <span class="math notranslate nohighlight">\(R_e\)</span>, <span class="math notranslate nohighlight">\(n\)</span>,
+<span class="math notranslate nohighlight">\(\mu_0\)</span>, <span class="math notranslate nohighlight">\(h_1 \ldots h_4\)</span>,
+<span class="math notranslate nohighlight">\(r_\mathrm{break,1} \ldots r_\mathrm{break,3}\)</span>,
+number of disc components, χ², BIC, BIC ratio</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">final_classification</span></code></p></td>
+<td><p>Integer break type (−1 = not classified; corresponds to types in the
+table above)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sb_threshold</span></code>, <code class="docutils literal notranslate"><span class="pre">rad_cut</span></code>, <code class="docutils literal notranslate"><span class="pre">sb_cut</span></code></p></td>
+<td><p>Applied SB threshold and corresponding profile truncation radius/SB</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="module4.html" class="btn btn-neutral float-left" title="Module 4 – Derived Photometric Parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../api/index.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Euclid Collaboration.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

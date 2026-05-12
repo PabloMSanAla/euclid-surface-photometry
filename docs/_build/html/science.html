@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scientific Background &mdash; Euclid Surface Photometry Pipeline 0.1.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=92734c54"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"macros": {"IE": "I_\\mathrm{E}", "YE": "Y_\\mathrm{E}", "JE": "J_\\mathrm{E}", "HE": "H_\\mathrm{E}"}}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage" href="usage.html" />
+    <link rel="prev" title="Euclid Surface Photometry Pipeline" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Euclid Surface Photometry Pipeline
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Scientific Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#disc-breaks-in-surface-brightness-profiles">Disc breaks in surface brightness profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#physical-origin">Physical origin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#redshift-evolution-measured-with-euclid-q1">Redshift evolution measured with <em>Euclid</em> Q1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sample-selection">Sample selection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/index.html">Pipeline Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Euclid Surface Photometry Pipeline</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Scientific Background</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/science.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="scientific-background">
+<span id="science"></span><h1>Scientific Background<a class="headerlink" href="#scientific-background" title="Link to this heading"></a></h1>
+<section id="disc-breaks-in-surface-brightness-profiles">
+<h2>Disc breaks in surface brightness profiles<a class="headerlink" href="#disc-breaks-in-surface-brightness-profiles" title="Link to this heading"></a></h2>
+<p>Most of the baryonic mass and angular momentum of galaxies reside in the disc
+component, making the radial distribution of stellar light a key tracer of disc
+formation and evolution.  It is now well established that the radial surface
+brightness profiles of disc galaxies frequently deviate from a single
+exponential, displaying changes in slope referred to as <strong>disc breaks</strong>
+(<a href="#id1"><span class="problematic" id="id2">:cite:t:`Pohlen06`</span></a>; <a href="#id3"><span class="problematic" id="id4">:cite:t:`Erwin08`</span></a>).</p>
+<p>Following the classification scheme of <a href="#id5"><span class="problematic" id="id6">:cite:t:`Pohlen06`</span></a> and <a href="#id7"><span class="problematic" id="id8">:cite:t:`Erwin08`</span></a>,
+disc galaxy profiles are divided into three categories:</p>
+<table class="docutils align-default" id="id25">
+<caption><span class="caption-text">Disc break types</span><a class="headerlink" href="#id25" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 20.0%" />
+<col style="width: 65.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Nickname</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Type I</strong></p></td>
+<td><p>Pure exponential</p></td>
+<td><p>Single exponential disc spanning several scale lengths with no break
+signature.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Type II</strong></p></td>
+<td><p>Down-bending</p></td>
+<td><p>Broken exponential with a <em>steeper</em> outer slope (truncated disc).
+Dominant in the local Universe (~50 % of disc galaxies at <span class="math notranslate nohighlight">\(z&lt;0.1\)</span>).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Type III</strong></p></td>
+<td><p>Up-bending</p></td>
+<td><p>Broken exponential with a <em>shallower</em> outer slope (anti-truncated disc).
+Becomes progressively more common at higher redshift.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Composite profiles with two or more breaks, such as <strong>Type II+III</strong>, <strong>Type
+III+II</strong>, <strong>Type II+II</strong>, and <strong>Type III+III</strong>, are also identified by the
+pipeline (Module 5).</p>
+<section id="physical-origin">
+<h3>Physical origin<a class="headerlink" href="#physical-origin" title="Link to this heading"></a></h3>
+<p>Type II breaks are most commonly associated with either <strong>star-formation
+thresholds</strong> linked to the gas surface density (<a href="#id9"><span class="problematic" id="id10">:cite:t:`Kennicutt1989`</span></a>) or
+with <strong>radial stellar migration</strong> driven by bars and other secular processes
+(<a href="#id11"><span class="problematic" id="id12">:cite:t:`Debattista06`</span></a>).  Their brighter break surface brightness
+(~23.0 mag arcsec⁻²) and their prevalence at late cosmic times support a
+scenario in which dynamically settled, gas-depleted discs preferentially
+develop down-bending profiles.</p>
+<p>Type III breaks arise from a wider variety of mechanisms including <strong>minor
+mergers</strong>, <strong>galaxy harassment</strong>, accretion of dark matter substructure, and
+the build-up of thick discs or stellar haloes
+(<a href="#id13"><span class="problematic" id="id14">:cite:t:`Borlaff14`</span></a>; <a href="#id15"><span class="problematic" id="id16">:cite:t:`Roediger12`</span></a>).  Their characteristic fainter
+break level (~24.2 mag arcsec⁻²) and the increase of their frequency toward
+higher redshifts are consistent with external environmental effects being
+more dominant at earlier cosmic epochs.</p>
+</section>
+<section id="redshift-evolution-measured-with-euclid-q1">
+<h3>Redshift evolution measured with <em>Euclid</em> Q1<a class="headerlink" href="#redshift-evolution-measured-with-euclid-q1" title="Link to this heading"></a></h3>
+<p>Using the pipeline described in this documentation applied to 4 385 well-classified
+disc galaxies out to <span class="math notranslate nohighlight">\(z=1\)</span>, <strong>Sánchez-Alarcón et al. (2026)</strong> find:</p>
+<ul class="simple">
+<li><p><strong>Type II</strong> profiles are the most common locally (&gt;50 %) but decrease
+steadily with lookback time.</p></li>
+<li><p><strong>Type III</strong> and <strong>Type II+III</strong> fractions rise from ~10 % at <span class="math notranslate nohighlight">\(z\approx0.05\)</span>
+to ~30 % each at <span class="math notranslate nohighlight">\(z\approx1\)</span>.</p></li>
+<li><p>The break radius correlates tightly with the outer disc scale length:
+<span class="math notranslate nohighlight">\(r_\mathrm{b}/h_\mathrm{out} \approx 2.9\)</span>, irrespective of break type.</p></li>
+</ul>
+<figure class="align-center" id="id26">
+<a class="reference internal image-reference" href="figures/Type_vs_redshift_grid.pdf"><img alt="Evolution of disc break type fractions with redshift" src="figures/Type_vs_redshift_grid.pdf" style="width: 95%;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><em>Evolution of the frequency of disc break types with cosmic time (lookback
+time on the upper x-axis, redshift on the lower x-axis).  Type I (top left),
+Type II (top right), Type III (bottom left), and Type II+III (bottom right).
+Results from this work are shown with filled symbols; literature values from
+Azzollini et al. (2008), Laine et al. (2014), Pranger et al. (2017),
+Sánchez-Alarcón et al. (2023), Borlaff et al. (2017), and Xu et al. (2024)
+are shown with open symbols.</em></span><a class="headerlink" href="#id26" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="sample-selection">
+<h2>Sample selection<a class="headerlink" href="#sample-selection" title="Link to this heading"></a></h2>
+<p>Galaxies are drawn from the <em>Euclid</em> Q1 Merged catalogue
+(<a href="#id17"><span class="problematic" id="id18">:cite:t:`EP-Aussel`</span></a>; <a href="#id19"><span class="problematic" id="id20">:cite:t:`Euclid-MER`</span></a>) using the following criteria:</p>
+<table class="docutils align-default" id="id27">
+<caption><span class="caption-text">Sample selection criteria</span><a class="headerlink" href="#id27" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 45.0%" />
+<col style="width: 15.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Label</p></th>
+<th class="head"><p>Criterion</p></th>
+<th class="head"><p>Remaining</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">smooth-or-featured_featured-or-disk_fraction</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(P_\mathrm{disc}\)</span></p></td>
+<td><p>&gt; 0.6</p></td>
+<td><p>84 071</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">kron_radius</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(R_\mathrm{Kron}\)</span></p></td>
+<td><p>&gt; 11 arcsec</p></td>
+<td><p>14 667</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">phz_pp_median_redshift</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(z\)</span></p></td>
+<td><p>&lt; 1</p></td>
+<td><p>11 687</p></td>
+</tr>
+<tr class="row-odd"><td><p><a href="#id29"><span class="problematic" id="id30">|Δz|</span></a>/z_mean</p></td>
+<td><p><span class="math notranslate nohighlight">\(\Delta z\)</span></p></td>
+<td><p>&lt; 0.01</p></td>
+<td><p><strong>8 748</strong></p></td>
+</tr>
+</tbody>
+</table>
+<p>The morphological disc probability <span class="math notranslate nohighlight">\(P_\mathrm{disc}\)</span> comes from the
+deep-learning catalogue of <a href="#id21"><span class="problematic" id="id22">:cite:t:`Q1-SP047`</span></a> using the <strong>Zoobot</strong> foundation
+model (<a href="#id23"><span class="problematic" id="id24">:cite:t:`Walmsley23-Zoobot`</span></a>).</p>
+<figure class="align-center" id="id28">
+<a class="reference internal image-reference" href="figures/sample_criteria.pdf"><img alt="Stellar mass vs. redshift for the selected sample" src="figures/sample_criteria.pdf" style="width: 75%;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><em>Stellar mass as a function of redshift.  The parent sample (violet) and the
+final disc galaxy sample (blue) are shown.  Stellar masses and redshifts are
+provided by the</em> <code class="docutils literal notranslate"><span class="pre">PHZ</span></code> <em>processing function.</em></span><a class="headerlink" href="#id28" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Euclid Surface Photometry Pipeline" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Euclid Collaboration.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

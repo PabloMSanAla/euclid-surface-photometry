@@ -1,0 +1,31 @@
+# Yaml file to run the Euclid surface photometry pipeline described 
+# in Euclid Consortium: Sanchez-Alarcon et al. (2026)
+
+pipeline_steps:
+  M1: True            # Module 1: Creates cutout of galaxy and mask
+  M2: True            # Module 2: Creates master profile from VIS cutout
+  M3: True            # Module 3: Measures the profile on NISP and External cutouts
+  M4: True            # Module 4: Measures parameters on the profiles
+  M5: True            # Module 5: Performs photometry and Disc modeling
+
+catalogs:
+  objects: "/Volumes/PMSAdrive/pmsa/code/Euclid/qualityControl/quality_control_local_short.csv"   # This is the catalog with the parameters of the objects to be processed. It should contain at least the columns: 'id', 'ra', 'dec', 'z'
+  ids: "/Volumes/PMSAdrive/pmsa/code/Euclid/qualityControl/quality_control_local_short.csv"       # This is the catalog with the ids of the objects to be processed. It should contain at least the column 'id' with the same ids as in the 'objects' catalog. If not provided, all objects in the 'objects' catalog will be processed.
+
+absolute_paths:
+  data_path: "/Volumes/PMSAdrive/pmsa/storage/Q1"                     # Path to the directory containing the data. 
+  output_path: "/Volumes/PMSAdrive/pmsa/storage/Euclid_AstroPipe"     # Path to the directory where the results will be stored.
+
+parameters:
+  n_kron: 3             ## Number of Kron radii to use for the cutout
+  max_size: 1000        ## Maximum size of the cutout in pixels
+  sb_threshold: 27.5    ## (29.75 at z=1) this is defined at z=0.
+
+logging:
+  # Logging level: DEBUG | INFO | WARNING | ERROR | CRITICAL
+  level: INFO
+  # Log file path; set to null to disable file logging
+  file: pipeline.log
+  # Format string for log records
+  format: "%(asctime)s [%(levelname)-8s] %(processName)s - %(message)s"
+  datefmt: "%Y-%m-%d %H:%M:%S"
