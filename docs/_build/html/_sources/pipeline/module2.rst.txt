@@ -47,9 +47,9 @@ Key algorithmic choices:
 The result is a table of PA, :math:`\varepsilon`, and their uncertainties as a
 function of SMA, forming the **master geometry profile** for the source.
 
-.. figure:: ../figures/Euclid_Pipeline.pdf
+.. figure:: ../figures/Euclid_Pipeline_M2.png
    :alt: M2 panel of the pipeline illustration
-   :width: 50%
+   :width: 85%
    :align: center
 
    *M2 panel: resulting PA (upper left) and :math:`\varepsilon` (lower left)

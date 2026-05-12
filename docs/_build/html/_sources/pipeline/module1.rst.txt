@@ -93,7 +93,7 @@ surface brightness levels.  A multi-step hierarchical masking strategy is used:
    eroded and dilated, and regions larger than FWHM² pixels are masked.
    The central 20 % of each galaxy segment is always left unmasked.
 
-.. figure:: ../figures/EUC_SEGMID_-612927984481008950_mask_segment.pdf
+.. figure:: ../figures/EUC_SEGMID_-612927984481008950_mask_segment.png
    :alt: Mask comparison for EUCL J040510.27−444836.3
    :width: 95%
    :align: center

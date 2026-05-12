@@ -15,6 +15,9 @@ from astropy.table import Table
 from .pipeline import *
 import warnings
 warnings.filterwarnings("ignore")
+logging.captureWarnings(True)
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+warnings.filterwarnings("ignore", category=RuntimeWarning, message=".*log10.*")
 
 __version__ = '0.1.2'
 
@@ -36,7 +39,10 @@ import traceback
 from astropy.table import Table
 from euclid_pipelines import *
 import warnings
+
 warnings.filterwarnings("ignore")
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+warnings.filterwarnings("ignore", category=RuntimeWarning, message=".*log10.*")
 
 __version__ = '0.1.2'
 
@@ -63,6 +69,7 @@ def _build_handlers(log_cfg):
         )
         fh.setFormatter(fmt)
         handlers.append(fh)
+        
     return handlers
 
 
@@ -85,6 +92,10 @@ def setup_logging(log_cfg):
     root.setLevel(level)
     qh = logging.handlers.QueueHandler(log_queue)
     root.handlers = [qh]
+    
+    for logger_name in ['astropy', 'astroquery', 'matplotlib']:
+        logging.getLogger(logger_name).setLevel(logging.ERROR)
+    
     return listener, log_queue
 
 
@@ -97,6 +108,9 @@ def _worker_logging_init(log_queue, level):
     root = logging.getLogger()
     root.handlers = [logging.handlers.QueueHandler(log_queue)]
     root.setLevel(level)
+    # Silence noise inside the worker too
+    for logger_name in ['astropy', 'astroquery', 'matplotlib']:
+        logging.getLogger(logger_name).setLevel(logging.ERROR)
 
 def read_yaml(file_path):
     with open(file_path, 'r') as stream:

@@ -47,7 +47,10 @@
 <li class="toctree-l1"><a class="reference internal" href="science.html">Scientific Background</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#configuration-file">Configuration file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-file">Configuration file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#logging-levels">Logging levels</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#running-the-pipeline">Running the pipeline</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#single-process">Single process</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#parallel-execution">Parallel execution</a></li>
@@ -120,10 +123,56 @@ A minimal example (<code class="docutils literal notranslate"><span class="pre">
 <span class="w">  </span><span class="nt">M3</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">   </span><span class="c1"># Sky background and surface brightness profiles</span>
 <span class="w">  </span><span class="nt">M4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">   </span><span class="c1"># Derived photometric parameters</span>
 <span class="w">  </span><span class="nt">M5</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">   </span><span class="c1"># Disc break classification</span>
+
+<span class="nt">logging</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># Minimum severity to emit: DEBUG | INFO | WARNING | ERROR | CRITICAL</span>
+<span class="w">  </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INFO</span>
+<span class="w">  </span><span class="c1"># Path for the rotating log file; set to null to disable file logging</span>
+<span class="w">  </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pipeline.log</span>
+<span class="w">  </span><span class="c1"># strftime-compatible format string</span>
+<span class="w">  </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;%(asctime)s</span><span class="nv"> </span><span class="s">[%(levelname)-8s]</span><span class="nv"> </span><span class="s">%(processName)s</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">%(message)s&quot;</span>
+<span class="w">  </span><span class="nt">datefmt</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;%Y-%m-%d</span><span class="nv"> </span><span class="s">%H:%M:%S&quot;</span>
 </pre></div>
 </div>
-<p>Setting any step to <code class="docutils literal notranslate"><span class="pre">false</span></code> instructs the pipeline to read previously saved
-results from the output directory instead of recomputing them.</p>
+<p>Setting any pipeline step to <code class="docutils literal notranslate"><span class="pre">false</span></code> instructs the pipeline to read
+previously saved results from the output directory instead of recomputing them.</p>
+<section id="logging-levels">
+<h3>Logging levels<a class="headerlink" href="#logging-levels" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 85.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Level</p></th>
+<th class="head"><p>Emitted messages</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DEBUG</span></code></p></td>
+<td><p>Per-galaxy module entry/exit, file paths, radial-bin counts, break
+classifications, full tracebacks on errors.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code></p></td>
+<td><p>Pipeline start/finish, galaxy completion status (M1–M5 flags), final
+result file path and execution time.  <strong>Recommended for production runs.</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WARNING</span></code></p></td>
+<td><p>Non-fatal issues that do not cause a module to fail (e.g. fallback to
+sigma-clipped sky estimate).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ERROR</span></code></p></td>
+<td><p>Per-galaxy pipeline errors (exception message only at this level).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CRITICAL</span></code></p></td>
+<td><p>Fatal errors that stop the entire pipeline.</p></td>
+</tr>
+</tbody>
+</table>
+<p>File logging uses a <a class="reference external" href="https://docs.python.org/3/library/logging.handlers.html#logging.handlers.RotatingFileHandler" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">logging.handlers.RotatingFileHandler</span></code></a> (10 MB
+per file, 5 backup files) so log files never grow unbounded.  Set <code class="docutils literal notranslate"><span class="pre">file</span></code> to
+<code class="docutils literal notranslate"><span class="pre">null</span></code> to log to the console only.</p>
+</section>
 </section>
 <section id="running-the-pipeline">
 <h2>Running the pipeline<a class="headerlink" href="#running-the-pipeline" title="Link to this heading"></a></h2>

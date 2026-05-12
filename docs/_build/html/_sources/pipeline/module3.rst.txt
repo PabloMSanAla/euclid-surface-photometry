@@ -52,9 +52,9 @@ The maximum :math:`R_\mathrm{max}` across all bands defines a common outer
 radius out to which the master profile is optionally extended via logarithmic
 interpolation before profile extraction.
 
-.. figure:: ../figures/Euclid_Pipeline.pdf
+.. figure:: ../figures/Euclid_Pipeline_M3.png
    :alt: M3 panel – sky background estimation
-   :width: 50%
+   :width: 85%
    :align: center
 
    *M3 panels for EUCL J040743.76−465230.1.  Top left: VIS cutout visualised

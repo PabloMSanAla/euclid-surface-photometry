@@ -1,0 +1,196 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comparison with MER photometry &mdash; Euclid Surface Photometry Pipeline 0.1.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=92734c54"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"macros": {"IE": "I_\\mathrm{E}", "YE": "Y_\\mathrm{E}", "JE": "J_\\mathrm{E}", "HE": "H_\\mathrm{E}"}}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api/index.html" />
+    <link rel="prev" title="Module 5 – Disc Break Classification" href="pipeline/module5.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Euclid Surface Photometry Pipeline
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="science.html">Scientific Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipeline/index.html">Pipeline Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Comparison with MER photometry</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#photometry-methods-in-mer">Photometry Methods in MER</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comparison-of-asymptotic-magnitudes">Comparison of Asymptotic Magnitudes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#results-tphot-vs-aphot">Results: TPHOT vs APHOT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interpretation-of-differences">Interpretation of Differences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-color-gradient-effects">Example: Color Gradient Effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recommendations">Recommendations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Euclid Surface Photometry Pipeline</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Comparison with MER photometry</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/mer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="comparison-with-mer-photometry">
+<span id="mer-comparison"></span><h1>Comparison with MER photometry<a class="headerlink" href="#comparison-with-mer-photometry" title="Link to this heading"></a></h1>
+<p>To validate the photometry of the pipeline, we compare our integrated magnitudes with those derived using the Multi-resolution Extractor and Resolution Matcher (MER) pipeline. MER provides a wide variety of ways to measure the photometry of a source. In addition to fixed aperture photometry, MER also provides total flux estimates (<code class="docutils literal notranslate"><span class="pre">FLUX_DETECTION_TOTAL</span></code> column) based on the Kron radius of the detected sources on the <em>I</em><sub>E</sub> image.</p>
+<section id="photometry-methods-in-mer">
+<h2>Photometry Methods in MER<a class="headerlink" href="#photometry-methods-in-mer" title="Link to this heading"></a></h2>
+<p>To extract the total flux in the other bands (<em>H</em><sub>E</sub>, <em>Y</em><sub>E</sub>, <em>J</em><sub>E</sub>, and <code class="docutils literal notranslate"><span class="pre">EXT</span></code>), the <a class="reference external" href="http://st-dm.pages.euclid-sgs.uk/data-product-doc/dm10/merdpd/merphotometrycookbook.html">photometry cookbook</a> of Euclid suggests scaling the total flux using a colour correction from aperture photometry (hereafter <code class="docutils literal notranslate"><span class="pre">APHOT</span></code>) or via <code class="docutils literal notranslate"><span class="pre">TEMPLFIT</span></code> (hereafter <code class="docutils literal notranslate"><span class="pre">TPHOT</span></code>). The <code class="docutils literal notranslate"><span class="pre">APHOT</span></code> colour correction relies on the aperture defined in terms of the FWHM. In contrast, the <code class="docutils literal notranslate"><span class="pre">TPHOT</span></code> colour correction uses priors from higher resolution images (VIS) to measure the photometry in other bands.</p>
+<p>The scaling factor for the <em>H</em><sub>E</sub> band is as follows:</p>
+<p>For the <code class="docutils literal notranslate"><span class="pre">APHOT</span></code> correction using the largest aperture (4 FWHM):</p>
+<div class="math notranslate nohighlight">
+\[\frac{\texttt{FLUX\_H\_4FWHM\_APER}}{\texttt{FLUX\_VIS\_4FWHM\_APER}}\]</div>
+<p>For the <code class="docutils literal notranslate"><span class="pre">TPHOT</span></code> correction:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\texttt{FLUX\_H\_TEMPLFIT}}{\texttt{FLUX\_VIS\_TO\_H\_TEMPLFIT}}\]</div>
+<p>These factors are multiplied by the parameter <code class="docutils literal notranslate"><span class="pre">FLUX_DETECTION_TOTAL</span></code> to obtain the total flux of the source in the NIR and <code class="docutils literal notranslate"><span class="pre">EXT</span></code> bands (where <code class="docutils literal notranslate"><span class="pre">EXT</span></code> refers to the complementary optical images included in EWS from external ground-based facilities). These are the best estimates of the total flux of the source in MER.</p>
+</section>
+<section id="comparison-of-asymptotic-magnitudes">
+<h2>Comparison of Asymptotic Magnitudes<a class="headerlink" href="#comparison-of-asymptotic-magnitudes" title="Link to this heading"></a></h2>
+<p>We compare our asymptotic magnitudes with the <code class="docutils literal notranslate"><span class="pre">TPHOT</span></code> apparent magnitudes for Euclid’s bands: <em>I</em><sub>E</sub>, <em>J</em><sub>E</sub>, <em>H</em><sub>E</sub>, and <em>Y</em><sub>E</sub>. The figure below shows the difference between our determination of the magnitudes and that of the <code class="docutils literal notranslate"><span class="pre">TPHOT</span></code> colour correction. The median trend is shown with the red curve. The blue curves show the median trend for the difference between our magnitudes and the <code class="docutils literal notranslate"><span class="pre">APHOT</span></code> photometry with MER.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="_images/magnitudes_templfit_photometry_2025-04-15.png"><img alt="Comparison of integrated magnitudes with MER using TEMPLFIT" src="_images/magnitudes_templfit_photometry_2025-04-15.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Comparison of integrated magnitudes measured with MER using the <code class="docutils literal notranslate"><span class="pre">TEMPLFIT</span></code> colour correction. All panels show the difference in magnitudes for our sample of galaxies (shown with a density plot) with respect to the <code class="docutils literal notranslate"><span class="pre">TPHOT</span></code> magnitude. Each panel shows a different Euclid band. The c.o.g. label refers to our asymptotic magnitudes measured using the curve of growth. The grey line indicates a null difference. The red curve shows the average of all values within bins of 0.6 magnitudes, and the grey filled regions show the mean root mean square (RMS) difference of all values and the average curve. The average difference and RMS are shown at the top right of each panel. The blue dashed curve shows the average trend for <code class="docutils literal notranslate"><span class="pre">APHOT</span></code> colour correction.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="results-tphot-vs-aphot">
+<h2>Results: TPHOT vs APHOT<a class="headerlink" href="#results-tphot-vs-aphot" title="Link to this heading"></a></h2>
+<p>We find good agreement between the values reported by MER and ours, with some differences that depend on the selected colour correction.</p>
+<p><strong>TPHOT Comparison:</strong></p>
+<p>In the case of <code class="docutils literal notranslate"><span class="pre">TPHOT</span></code>, we systematically recover brighter magnitudes than MER, with a mean difference of:</p>
+<ul class="simple">
+<li><p><em>I</em><sub>E</sub>: -0.09 ± 0.05 mag</p></li>
+<li><p><em>J</em><sub>E</sub>: -0.10 ± 0.06 mag</p></li>
+<li><p><em>H</em><sub>E</sub>: -0.12 ± 0.07 mag</p></li>
+<li><p><em>Y</em><sub>E</sub>: -0.10 ± 0.07 mag</p></li>
+</ul>
+<p>The error is estimated as the root mean square (RMS) of the difference between all values and the mean trend curve. This difference tends to increase with the magnitude of the source, reaching ~0.2 mag at levels of 21 mag in <em>I</em><sub>E</sub> and at 19 mag for the NIR bands.</p>
+<p><strong>APHOT Comparison:</strong></p>
+<p>In the case of <code class="docutils literal notranslate"><span class="pre">APHOT</span></code> photometry (blue curves) of NISP bands (<em>J</em><sub>E</sub>, <em>H</em><sub>E</sub>, and <em>Y</em><sub>E</sub>), we find similar trends for the three bands with some correlation with the magnitude of the sources:</p>
+<ul class="simple">
+<li><p>For sources <strong>brighter than 17.5 mag</strong>: our asymptotic magnitudes tend to be fainter than the <code class="docutils literal notranslate"><span class="pre">APHOT</span></code> magnitudes (around ~0.05 mag).</p></li>
+<li><p>For sources <strong>fainter than 17.5 mag</strong>: we recover brighter magnitudes than <code class="docutils literal notranslate"><span class="pre">APHOT</span></code> (around ~0.1 mag).</p></li>
+</ul>
+</section>
+<section id="interpretation-of-differences">
+<h2>Interpretation of Differences<a class="headerlink" href="#interpretation-of-differences" title="Link to this heading"></a></h2>
+<p>These differences can be associated with the systematics in the different methodologies used to measure the integrated magnitudes and with the background subtraction calibration. Our method consists of integrating the surface brightness profiles that extend out to the region where the background is reached and extrapolating the asymptote. This technique offers a correction on the flux missed by the lack of depth of the data, and we also account for possible masked regions within the galaxy.</p>
+<p>In addition, we include the MER background maps and recompute the background using our own methods, which may also introduce flux of the galaxy previously removed by oversubtraction effects. This flux correction and the addition of the background maps could explain the brighter sources with respect to <code class="docutils literal notranslate"><span class="pre">TPHOT</span></code> photometry.</p>
+<p>However, with respect to <code class="docutils literal notranslate"><span class="pre">APHOT</span></code> photometry, NISP shows two different behaviours. For the faintest sources, our magnitudes recover more flux, as expected from the same reasoning as with <code class="docutils literal notranslate"><span class="pre">TPHOT</span></code>. For brighter sources, <code class="docutils literal notranslate"><span class="pre">APHOT</span></code> photometry recovers brighter sources than our method. The magnitudes for the NISP instrument are scaled using the total flux detected in <em>I</em><sub>E</sub> and a normalisation factor from the fraction between the flux measured in the <em>I</em><sub>E</sub> and the NIR bands that depend on the method.</p>
+<p>If the source is brighter, concentrated, and large enough, the aperture only covers the central region of the source, and the correction extrapolates the colour from the central region to the outskirts of the source. In most cases of galaxies, there are gradients in colours, and the normalisation term cannot reproduce the colour of the outskirts. The effect is more prominent on the brightest and largest galaxies.</p>
+</section>
+<section id="example-color-gradient-effects">
+<h2>Example: Color Gradient Effects<a class="headerlink" href="#example-color-gradient-effects" title="Link to this heading"></a></h2>
+<p>We show an example of a galaxy with a brighter magnitude given by <code class="docutils literal notranslate"><span class="pre">APHOT</span></code> in the figure below. The left panel shows an LRGB image and the aperture of size 4 FWHM used to measure the <code class="docutils literal notranslate"><span class="pre">APHOT</span></code> colour correction. The top right panel shows the surface brightness profile for <em>I</em><sub>E</sub> (blue dashed curve), <em>H</em><sub>E</sub> (orange curve), and the normalised <em>I</em><sub>E</sub> (blue curve) using the colour correction from MER. The bottom right panel shows the curve of growth for each profile.</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/comparison_MER_profiles_normalised.png"><img alt="Example of APHOT colour correction with profiles" src="_images/comparison_MER_profiles_normalised.png" style="width: 90%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Example of the <code class="docutils literal notranslate"><span class="pre">APHOT</span></code> colour correction on a galaxy of our sample and the surface and cumulative brightness profile. The left panel shows an LRGB image with the aperture of 4 FWHM shown with the blue circle. The top right panel shows the surface brightness profile measured for <em>I</em><sub>E</sub> (blue dashed curve), <em>H</em><sub>E</sub> (orange curve), and the normalised <em>I</em><sub>E</sub> bands using the aperture colour correction from MER. The bottom panel shows the curve of growth for those profiles. The vertical red dotted line shows the radius of the aperture. The asymptotic magnitudes and the aperture-corrected magnitudes from MER are shown above the top right panel. The difference between the normalised <em>I</em><sub>E</sub> and the <em>H</em><sub>E</sub> magnitudes is shown in the bottom right panel.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Around the location of the aperture, the profiles diverge, and the normalised profile overestimates the emission on the <em>H</em><sub>E</sub> band (0.13 mag larger) due to a redder central region than the outskirts of the galaxy. This overestimation is due to tracing the colour of the central region of galaxies rather than the global colour, which explains the behaviour for bright sources (&gt;17.5 mag) for the <code class="docutils literal notranslate"><span class="pre">APHOT</span></code> colour correction.</p>
+<p>We measure the difference between <em>H</em><sub>E</sub> and the normalised <em>J</em><sub>E</sub> surface brightness profile for all galaxies and we find an average difference of 0.07 ± 0.06 mag that reaches up to 0.12 mag for galaxies brighter than 17.5 mag.</p>
+</section>
+<section id="recommendations">
+<h2>Recommendations<a class="headerlink" href="#recommendations" title="Link to this heading"></a></h2>
+<p>Based on our analysis:</p>
+<ol class="arabic simple">
+<li><p><strong>Use TPHOT colour correction</strong>, especially for bright and large sources, as aperture corrections may be biased by colour gradients.</p></li>
+<li><p>Our method recovers photometry with a scatter (~0.05–0.07 mag) <strong>within the errors of the photometry provided by MER</strong>, but recovers slightly more flux (~0.09–0.12 mag) than MER, especially for the fainter sources.</p></li>
+<li><p>For <strong>bright sources (&gt;17.5 mag)</strong>, be aware that <code class="docutils literal notranslate"><span class="pre">APHOT</span></code> corrections may overestimate flux due to color gradients between the central and outer regions of galaxies.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pipeline/module5.html" class="btn btn-neutral float-left" title="Module 5 – Disc Break Classification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api/index.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Euclid Collaboration.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

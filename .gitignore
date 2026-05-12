@@ -1,7 +1,8 @@
 *pdf
 *tex
+*txt
 euclid_pipelines.py
 euclid_profile*
 *test.yaml
 __pycache__/*
-.*
+._*

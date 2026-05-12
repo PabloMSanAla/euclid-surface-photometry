@@ -49,7 +49,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../science.html">Scientific Background</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Pipeline Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#data-flow">Data flow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="module1.html">Module 1 – Cutouts and Masks</a></li>
 <li class="toctree-l3"><a class="reference internal" href="module2.html">Module 2 – Position Angle and Ellipticity Profiles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="module3.html">Module 3 – Sky Background and Surface Brightness Profiles</a></li>
@@ -59,6 +59,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../mer.html">Comparison with MER photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
@@ -92,7 +93,7 @@
 <p>The pipeline consists of five sequential modules (M1–M5), illustrated in the
 figure below for the galaxy EUCL J040743.76−465230.1.</p>
 <figure class="align-center" id="id1">
-<a class="reference internal image-reference" href="figures/Euclid_Pipeline.pdf"><img alt="Five-module pipeline overview" src="figures/Euclid_Pipeline.pdf" style="width: 98%;" />
+<a class="reference internal image-reference" href="../_images/Euclid_Pipeline.png"><img alt="Five-module pipeline overview" src="../_images/Euclid_Pipeline.png" style="width: 98%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><em>Illustration of each module in the automatic pipeline.  Each module is
@@ -145,8 +146,8 @@ BIC-based model selection, and disc break type classification.</p></td>
 </tr>
 </tbody>
 </table>
-<section id="data-flow">
-<h2>Data flow<a class="headerlink" href="#data-flow" title="Link to this heading"></a></h2>
+<section id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Master catalogue (ra, dec, kron_radius, redshift)
         │
         ▼
@@ -171,7 +172,7 @@ BIC-based model selection, and disc break type classification.</p></td>
              │
              ▼
 ┌────────────────────────────────┐
-│  M5 – Disc break classification│  → breaks.csv  (type, h_in, h_out, r_b)
+│  M5 – Disc break classification│  → breaks.csv  (type, h_in, h_out, r_b, …)
 └────────────────────────────────┘
 </pre></div>
 </div>

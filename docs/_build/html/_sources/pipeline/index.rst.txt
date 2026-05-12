@@ -6,7 +6,7 @@ Pipeline Overview
 The pipeline consists of five sequential modules (M1–M5), illustrated in the
 figure below for the galaxy EUCL J040743.76−465230.1.
 
-.. figure:: ../figures/Euclid_Pipeline.pdf
+.. figure:: ../figures/Euclid_Pipeline.png
    :alt: Five-module pipeline overview
    :width: 98%
    :align: center
@@ -47,7 +47,7 @@ figure below for the galaxy EUCL J040743.76−465230.1.
      - Change-point detection, piecewise Sérsic + broken-exponential fitting,
        BIC-based model selection, and disc break type classification.
 
-Data flow
+Modules
 ---------
 
 .. code-block:: text
@@ -76,7 +76,7 @@ Data flow
                 │
                 ▼
    ┌────────────────────────────────┐
-   │  M5 – Disc break classification│  → breaks.csv  (type, h_in, h_out, r_b)
+   │  M5 – Disc break classification│  → breaks.csv  (type, h_in, h_out, r_b, …)
    └────────────────────────────────┘
 
 .. toctree::

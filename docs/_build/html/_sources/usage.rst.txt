@@ -44,8 +44,44 @@ A minimal example (``euclid_config.yaml``):
      M4: true   # Derived photometric parameters
      M5: true   # Disc break classification
 
-Setting any step to ``false`` instructs the pipeline to read previously saved
-results from the output directory instead of recomputing them.
+   logging:
+     # Minimum severity to emit: DEBUG | INFO | WARNING | ERROR | CRITICAL
+     level: INFO
+     # Path for the rotating log file; set to null to disable file logging
+     file: pipeline.log
+     # strftime-compatible format string
+     format: "%(asctime)s [%(levelname)-8s] %(processName)s - %(message)s"
+     datefmt: "%Y-%m-%d %H:%M:%S"
+
+Setting any pipeline step to ``false`` instructs the pipeline to read
+previously saved results from the output directory instead of recomputing them.
+
+Logging levels
+^^^^^^^^^^^^^^
+
+.. list-table::
+   :header-rows: 1
+   :widths: 15 85
+
+   * - Level
+     - Emitted messages
+   * - ``DEBUG``
+     - Per-galaxy module entry/exit, file paths, radial-bin counts, break
+       classifications, full tracebacks on errors.
+   * - ``INFO``
+     - Pipeline start/finish, galaxy completion status (M1–M5 flags), final
+       result file path and execution time.  **Recommended for production runs.**
+   * - ``WARNING``
+     - Non-fatal issues that do not cause a module to fail (e.g. fallback to
+       sigma-clipped sky estimate).
+   * - ``ERROR``
+     - Per-galaxy pipeline errors (exception message only at this level).
+   * - ``CRITICAL``
+     - Fatal errors that stop the entire pipeline.
+
+File logging uses a :class:`logging.handlers.RotatingFileHandler` (10 MB
+per file, 5 backup files) so log files never grow unbounded.  Set ``file`` to
+``null`` to log to the console only.
 
 Running the pipeline
 --------------------

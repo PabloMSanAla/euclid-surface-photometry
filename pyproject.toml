@@ -11,4 +11,4 @@ dependencies = [
 ]
 
 [project.scripts]
- = "euclid-surface-photometry.pipeline:main"
+ euclid-surface-photometry = "euclid-surface-photometry.pipeline:main"

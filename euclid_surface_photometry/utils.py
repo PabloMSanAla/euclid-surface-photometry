@@ -654,8 +654,8 @@ def create_yaml_config(filename='euclid_config.yaml', config_dict=None):
             "output_path": "/media/team_workspaces/euclid-surface-photometry-pipeline/storage/test_results",
         },
         "parameters": {
-            "n_kron": 3,
-            "max_size": 1000,
+            "n_kron": 5,
+            "max_size": 2000,
             "sb_threshold": 27.5,
         },
         "logging": {

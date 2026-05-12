@@ -49,7 +49,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../science.html">Scientific Background</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Pipeline Overview</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="index.html#data-flow">Data flow</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#modules">Modules</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="module1.html">Module 1 – Cutouts and Masks</a></li>
 <li class="toctree-l3"><a class="reference internal" href="module2.html">Module 2 – Position Angle and Ellipticity Profiles</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Module 3 – Sky Background and Surface Brightness Profiles</a><ul>
@@ -102,9 +102,8 @@ Read master profile and measure it for the different bands.</p>
 <p>Result file: EUC_SEGMID_{object_id}_profiles.csv</p>
 <dl class="simple">
 <dt>&#64;TODO:</dt><dd><p>Once the maximum radius if measured, crop the array
-alocated in memory prior to give it to the function
-to measure the profile. We need to be sure that
-the center lays in a pixel.</p>
+allocated in memory prior to give it to the function
+to measure the profile.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
@@ -165,7 +164,7 @@ the background uncertainty (standard deviation of box medians normalised by
 radius out to which the master profile is optionally extended via logarithmic
 interpolation before profile extraction.</p>
 <figure class="align-center" id="id5">
-<a class="reference internal image-reference" href="figures/Euclid_Pipeline.pdf"><img alt="M3 panel – sky background estimation" src="figures/Euclid_Pipeline.pdf" style="width: 50%;" />
+<a class="reference internal image-reference" href="../_images/Euclid_Pipeline_M3.png"><img alt="M3 panel – sky background estimation" src="../_images/Euclid_Pipeline_M3.png" style="width: 85%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><em>M3 panels for EUCL J040743.76−465230.1.  Top left: VIS cutout visualised

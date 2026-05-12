@@ -72,7 +72,7 @@ disc galaxies out to :math:`z=1`, **Sánchez-Alarcón et al. (2026)** find:
 * The break radius correlates tightly with the outer disc scale length:
   :math:`r_\mathrm{b}/h_\mathrm{out} \approx 2.9`, irrespective of break type.
 
-.. figure:: figures/Type_vs_redshift_grid.pdf
+.. figure:: figures/Type_vs_redshift_grid.png
    :alt: Evolution of disc break type fractions with redshift
    :width: 95%
    :align: center
@@ -120,7 +120,7 @@ The morphological disc probability :math:`P_\mathrm{disc}` comes from the
 deep-learning catalogue of :cite:t:`Q1-SP047` using the **Zoobot** foundation
 model (:cite:t:`Walmsley23-Zoobot`).
 
-.. figure:: figures/sample_criteria.pdf
+.. figure:: figures/sample_criteria.png
    :alt: Stellar mass vs. redshift for the selected sample
    :width: 75%
    :align: center

@@ -24,9 +24,9 @@ asymptotic magnitude is obtained by fitting a straight line to the final,
 settling portion of the CoG and extrapolating to its y-intercept
 (:cite:t:`Watkins22`).
 
-.. figure:: ../figures/Euclid_Pipeline.pdf
+.. figure:: ../figures/Euclid_Pipeline_M4.png
    :alt: M4 panel – curve of growth
-   :width: 45%
+   :width: 85%
    :align: center
 
    *Left M4 panel: curve of growth for EUCL J040743.76−465230.1 used to derive

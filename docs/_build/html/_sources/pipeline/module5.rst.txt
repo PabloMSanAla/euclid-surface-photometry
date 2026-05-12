@@ -205,9 +205,9 @@ Estimated classification accuracy is **~70 %** based on visual inspection of
 490 randomly selected galaxies from the reliable sample
 (:math:`\chi^2_\nu < 0.75`, :math:`\chi^2_\mathrm{max} < 7.4`).
 
-.. figure:: ../figures/Euclid_Pipeline.pdf
+.. figure:: ../figures/Euclid_Pipeline_M5.png
    :alt: M5 panel – change-point analysis and profile fit
-   :width: 50%
+   :width: 100%
    :align: center
 
    *M5 panels for EUCL J040743.76−465230.1.  Top left: :math:`\mu_{I_\mathrm{E}}`
@@ -216,7 +216,7 @@ Estimated classification accuracy is **~70 %** based on visual inspection of
    define two disc regions.  Bottom right: best-fit broken exponential (Type II)
    overlaid on the observed profile.*
 
-.. figure:: ../figures/average_profiles_VIS.pdf
+.. figure:: ../figures/average_profiles_VIS.png
    :alt: Stacked profiles by disc break type
    :width: 90%
    :align: center

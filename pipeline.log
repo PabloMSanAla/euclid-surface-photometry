@@ -1,0 +1,95 @@
+2026-05-12 14:06:21 [INFO    ] MainProcess - Euclid Pipeline v0.1.2
+2026-05-12 14:06:21 [INFO    ] MainProcess - Config file  : euclid_config.yaml
+2026-05-12 14:06:21 [INFO    ] MainProcess - Log level    : INFO
+2026-05-12 14:06:21 [INFO    ] MainProcess - Log file     : pipeline.log
+2026-05-12 14:06:21 [INFO    ] MainProcess - Processors   : 4
+2026-05-12 14:06:21 [INFO    ] MainProcess - Galaxies     : 11
+2026-05-12 14:06:21 [INFO    ] MainProcess - Starting at  : 2026-05-12 14:06
+2026-05-12 14:06:37 [ERROR   ] SpawnPoolWorker-1 - [-604693264472802703] pipeline error: buffer is too small for requested array
+2026-05-12 14:06:41 [ERROR   ] SpawnPoolWorker-1 - [-598964779475615386] pipeline error: buffer is too small for requested array
+2026-05-12 14:06:43 [ERROR   ] SpawnPoolWorker-2 - [2743622077659820650] pipeline error: buffer is too small for requested array
+2026-05-12 14:06:46 [ERROR   ] SpawnPoolWorker-1 - [-599162792472943906] pipeline error: buffer is too small for requested array
+2026-05-12 14:06:54 [INFO    ] SpawnPoolWorker-3 - : Center initialized by user: {'x': 499.2893971542562, 'y': 499.10630818362006}
+2026-05-12 14:06:54 [INFO    ] SpawnPoolWorker-4 - : Center initialized by user: {'x': 499.3630581600555, 'y': 499.4309560790242}
+2026-05-12 14:07:01 [INFO    ] SpawnPoolWorker-2 - : Center initialized by user: {'x': 498.66734789616476, 'y': 499.11920051752804}
+2026-05-12 14:07:01 [INFO    ] SpawnPoolWorker-1 - : Center initialized by user: {'x': 498.6317108338483, 'y': 499.24512005392626}
+2026-05-12 14:07:11 [ERROR   ] SpawnPoolWorker-4 - [-649860388475207182] pipeline error: not a PNG file
+2026-05-12 14:07:11 [ERROR   ] SpawnPoolWorker-3 - [-650102495472993363] pipeline error: not a PNG file
+2026-05-12 14:07:22 [INFO    ] SpawnPoolWorker-4 - : Center initialized by user: {'x': 499.5571321110274, 'y': 499.5262855150786}
+2026-05-12 14:07:23 [INFO    ] SpawnPoolWorker-3 - : Center initialized by user: {'x': 498.6557918375993, 'y': 499.21377731947814}
+2026-05-12 14:08:41 [INFO    ] SpawnPoolWorker-2 - GalaxyIsophoteFit: Started Fmode fitting at iteration 134
+2026-05-12 14:09:44 [INFO    ] SpawnPoolWorker-1 - GalaxyIsophoteFit: Completed isohpote fit in 300 itterations
+2026-05-12 14:09:47 [INFO    ] SpawnPoolWorker-4 - GalaxyIsophoteFit: Started Fmode fitting at iteration 281
+2026-05-12 14:09:48 [WARNING ] SpawnPoolWorker-1 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:09:48 [WARNING ] SpawnPoolWorker-1 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:09:55 [ERROR   ] SpawnPoolWorker-1 - [-537739764284036331] pipeline error: No SIMPLE card found, this file does not appear to be a valid FITS file. If this is really a FITS file, try with ignore_missing_simple=True
+2026-05-12 14:09:58 [INFO    ] SpawnPoolWorker-3 - GalaxyIsophoteFit: Completed isohpote fit in 300 itterations
+2026-05-12 14:10:02 [WARNING ] SpawnPoolWorker-3 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:10:02 [WARNING ] SpawnPoolWorker-3 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:10:03 [ERROR   ] SpawnPoolWorker-3 - [-517445435283412491] pipeline error: No SIMPLE card found, this file does not appear to be a valid FITS file. If this is really a FITS file, try with ignore_missing_simple=True
+2026-05-12 14:10:03 [INFO    ] SpawnPoolWorker-1 - : Center initialized by user: {'x': 498.6353237137737, 'y': 498.6483779798227}
+2026-05-12 14:11:15 [INFO    ] SpawnPoolWorker-2 - GalaxyIsophoteFit: Completed isohpote fit in 300 itterations
+2026-05-12 14:11:20 [WARNING ] SpawnPoolWorker-2 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:11:20 [WARNING ] SpawnPoolWorker-2 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:11:21 [ERROR   ] SpawnPoolWorker-2 - [2728549872661986358] pipeline error: No SIMPLE card found, this file does not appear to be a valid FITS file. If this is really a FITS file, try with ignore_missing_simple=True
+2026-05-12 14:12:04 [INFO    ] SpawnPoolWorker-4 - GalaxyIsophoteFit: Completed isohpote fit in 300 itterations
+2026-05-12 14:12:10 [WARNING ] SpawnPoolWorker-4 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:12:10 [WARNING ] SpawnPoolWorker-4 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:12:11 [ERROR   ] SpawnPoolWorker-4 - [-539047005283254744] pipeline error: No SIMPLE card found, this file does not appear to be a valid FITS file. If this is really a FITS file, try with ignore_missing_simple=True
+2026-05-12 14:12:35 [INFO    ] SpawnPoolWorker-1 - GalaxyIsophoteFit: Completed isohpote fit in 300 itterations
+2026-05-12 14:12:39 [WARNING ] SpawnPoolWorker-1 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:12:39 [WARNING ] SpawnPoolWorker-1 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:12:40 [ERROR   ] SpawnPoolWorker-1 - [-535620474284324775] pipeline error: No SIMPLE card found, this file does not appear to be a valid FITS file. If this is really a FITS file, try with ignore_missing_simple=True
+2026-05-12 14:12:40 [INFO    ] MainProcess - Results saved to: /Volumes/PMSAdrive/pmsa/code/euclid-surface-photometry/euclid_surface_photometry/profile_results_2026-05-12_1412.csv
+2026-05-12 14:12:40 [INFO    ] MainProcess - Execution time: 0 days 00h:06m:18s
+2026-05-12 14:12:40 [INFO    ] MainProcess - Pipeline completed successfully.
+2026-05-12 14:17:36 [INFO    ] MainProcess - Euclid Pipeline v0.1.2
+2026-05-12 14:17:36 [INFO    ] MainProcess - Config file  : euclid_config.yaml
+2026-05-12 14:17:36 [INFO    ] MainProcess - Log level    : INFO
+2026-05-12 14:17:36 [INFO    ] MainProcess - Log file     : pipeline.log
+2026-05-12 14:17:36 [INFO    ] MainProcess - Processors   : 4
+2026-05-12 14:17:36 [INFO    ] MainProcess - Galaxies     : 11
+2026-05-12 14:17:36 [INFO    ] MainProcess - Starting at  : 2026-05-12 14:17
+2026-05-12 14:17:51 [ERROR   ] SpawnPoolWorker-4 - [-604693264472802703] pipeline error: buffer is too small for requested array
+2026-05-12 14:17:52 [ERROR   ] SpawnPoolWorker-4 - [-598964779475615386] pipeline error: buffer is too small for requested array
+2026-05-12 14:17:53 [ERROR   ] SpawnPoolWorker-4 - [-599162792472943906] pipeline error: buffer is too small for requested array
+2026-05-12 14:17:54 [ERROR   ] SpawnPoolWorker-2 - [2743622077659820650] pipeline error: buffer is too small for requested array
+2026-05-12 14:18:00 [INFO    ] SpawnPoolWorker-1 - : Center initialized by user: {'x': 499.3630581600555, 'y': 499.4309560790242}
+2026-05-12 14:18:00 [INFO    ] SpawnPoolWorker-3 - : Center initialized by user: {'x': 499.2893971542562, 'y': 499.10630818362006}
+2026-05-12 14:18:05 [INFO    ] SpawnPoolWorker-2 - : Center initialized by user: {'x': 498.6317108338483, 'y': 499.24512005392626}
+2026-05-12 14:18:05 [INFO    ] SpawnPoolWorker-4 - : Center initialized by user: {'x': 498.66734789616476, 'y': 499.11920051752804}
+2026-05-12 14:20:04 [INFO    ] SpawnPoolWorker-4 - GalaxyIsophoteFit: Started Fmode fitting at iteration 183
+2026-05-12 14:20:46 [INFO    ] SpawnPoolWorker-2 - GalaxyIsophoteFit: Completed isohpote fit in 300 itterations
+2026-05-12 14:20:50 [WARNING ] SpawnPoolWorker-2 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:20:50 [WARNING ] SpawnPoolWorker-2 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:20:51 [ERROR   ] SpawnPoolWorker-2 - [-537739764284036331] pipeline error: No SIMPLE card found, this file does not appear to be a valid FITS file. If this is really a FITS file, try with ignore_missing_simple=True
+2026-05-12 14:20:54 [INFO    ] SpawnPoolWorker-3 - GalaxyIsophoteFit: Completed isohpote fit in 300 itterations
+2026-05-12 14:20:59 [WARNING ] SpawnPoolWorker-3 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:20:59 [WARNING ] SpawnPoolWorker-3 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:21:00 [INFO    ] SpawnPoolWorker-2 - : Center initialized by user: {'x': 499.5571321110274, 'y': 499.5262855150786}
+2026-05-12 14:21:01 [ERROR   ] SpawnPoolWorker-3 - [-650102495472993363] pipeline error: No SIMPLE card found, this file does not appear to be a valid FITS file. If this is really a FITS file, try with ignore_missing_simple=True
+2026-05-12 14:21:09 [INFO    ] SpawnPoolWorker-3 - : Center initialized by user: {'x': 498.6557918375993, 'y': 499.21377731947814}
+2026-05-12 14:21:39 [INFO    ] SpawnPoolWorker-1 - GalaxyIsophoteFit: Completed isohpote fit in 300 itterations
+2026-05-12 14:21:44 [WARNING ] SpawnPoolWorker-1 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:21:44 [WARNING ] SpawnPoolWorker-1 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:21:45 [ERROR   ] SpawnPoolWorker-1 - [-649860388475207182] pipeline error: No SIMPLE card found, this file does not appear to be a valid FITS file. If this is really a FITS file, try with ignore_missing_simple=True
+2026-05-12 14:21:54 [INFO    ] SpawnPoolWorker-1 - : Center initialized by user: {'x': 498.6353237137737, 'y': 498.6483779798227}
+2026-05-12 14:22:38 [INFO    ] SpawnPoolWorker-4 - GalaxyIsophoteFit: Completed isohpote fit in 300 itterations
+2026-05-12 14:22:44 [WARNING ] SpawnPoolWorker-4 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:22:44 [WARNING ] SpawnPoolWorker-4 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:22:45 [ERROR   ] SpawnPoolWorker-4 - [2728549872661986358] pipeline error: No SIMPLE card found, this file does not appear to be a valid FITS file. If this is really a FITS file, try with ignore_missing_simple=True
+2026-05-12 14:23:32 [INFO    ] SpawnPoolWorker-2 - GalaxyIsophoteFit: Completed isohpote fit in 300 itterations
+2026-05-12 14:23:36 [WARNING ] SpawnPoolWorker-2 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:23:36 [WARNING ] SpawnPoolWorker-2 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:23:37 [ERROR   ] SpawnPoolWorker-2 - [-539047005283254744] pipeline error: No SIMPLE card found, this file does not appear to be a valid FITS file. If this is really a FITS file, try with ignore_missing_simple=True
+2026-05-12 14:23:47 [INFO    ] SpawnPoolWorker-3 - GalaxyIsophoteFit: Completed isohpote fit in 300 itterations
+2026-05-12 14:23:51 [WARNING ] SpawnPoolWorker-3 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:23:51 [WARNING ] SpawnPoolWorker-3 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:23:52 [ERROR   ] SpawnPoolWorker-3 - [-517445435283412491] pipeline error: No SIMPLE card found, this file does not appear to be a valid FITS file. If this is really a FITS file, try with ignore_missing_simple=True
+2026-05-12 14:24:28 [INFO    ] SpawnPoolWorker-1 - GalaxyIsophoteFit: Completed isohpote fit in 300 itterations
+2026-05-12 14:24:32 [WARNING ] SpawnPoolWorker-1 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:24:32 [WARNING ] SpawnPoolWorker-1 - Input data contains invalid values (NaNs or infs), which were automatically clipped.
+2026-05-12 14:24:33 [ERROR   ] SpawnPoolWorker-1 - [-535620474284324775] pipeline error: No SIMPLE card found, this file does not appear to be a valid FITS file. If this is really a FITS file, try with ignore_missing_simple=True
+2026-05-12 14:24:33 [INFO    ] MainProcess - Results saved to: /Volumes/PMSAdrive/pmsa/code/euclid-surface-photometry/profile_results_2026-05-12_1424.csv
+2026-05-12 14:24:33 [INFO    ] MainProcess - Execution time: 0 days 00h:06m:57s
+2026-05-12 14:24:33 [INFO    ] MainProcess - Pipeline completed successfully.

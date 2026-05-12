@@ -17,8 +17,8 @@ absolute_paths:
   output_path: "/Volumes/PMSAdrive/pmsa/storage/Euclid_AstroPipe"     # Path to the directory where the results will be stored.
 
 parameters:
-  n_kron: 3             ## Number of Kron radii to use for the cutout
-  max_size: 1000        ## Maximum size of the cutout in pixels
+  n_kron: 5             ## Number of Kron radii to use for the cutout
+  max_size: 2000        ## Maximum size of the cutout in pixels
   sb_threshold: 27.5    ## (29.75 at z=1) this is defined at z=0.
 
 logging:

@@ -48,6 +48,7 @@
 <li class="toctree-l1"><a class="reference internal" href="science.html">Scientific Background</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline/index.html">Pipeline Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mer.html">Comparison with MER photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
@@ -78,7 +79,7 @@
              
   <section id="euclid-surface-photometry-pipeline">
 <h1>Euclid Surface Photometry Pipeline<a class="headerlink" href="#euclid-surface-photometry-pipeline" title="Link to this heading"></a></h1>
-<a class="reference internal image-reference" href="figures/Euclid_Pipeline.pdf"><img alt="Overview of the five-module pipeline applied to galaxy EUCL J040743.76−465230.1" class="align-center" src="figures/Euclid_Pipeline.pdf" style="width: 100%;" />
+<a class="reference internal image-reference" href="_images/Euclid_Pipeline.png"><img alt="Overview of the five-module pipeline applied to galaxy EUCL J040743.76−465230.1" class="align-center" src="_images/Euclid_Pipeline.png" style="width: 100%;" />
 </a>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -88,27 +89,27 @@
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>This package implements an automatic surface brightness profile analysis pipeline
 designed to extract and characterise the radial light distribution of disc galaxies
-observed by the <strong>Euclid</strong> space mission.
-The pipeline was applied to <strong>8 748 disc galaxies</strong> selected from the Euclid Quick
-Release 1 (Q1) dataset, covering 63.1 deg² across the three Euclid Deep Fields (EDF-N,
+observed by the <em>Euclid</em> space mission.
+In <em>Sánchez-Alarcón et al. 2026</em> the pipeline was applied to <strong>8 748 disc galaxies</strong> selected from the <em>Euclid</em> Quick
+Release 1 (Q1) dataset, covering 63.1 deg² across the three <em>Euclid</em> Deep Fields (EDF-N,
 EDF-S, EDF-Fornax).</p>
 <p>The pipeline produces, for each galaxy:</p>
 <ul class="simple">
-<li><p>Multi-band image <strong>cutouts</strong> centred on the source and combined masks that remove
+<li><p><strong>Module 1</strong>: Multi-band image <strong>cutouts</strong> centred on the source and combined masks that remove
 contaminating neighbours while preserving the low surface brightness outskirts of
-the target (Module 1).</p></li>
-<li><p>Radial <strong>position-angle (PA) and ellipticity (ε) profiles</strong> measured via elliptical
-isophote fitting (Module 2).</p></li>
-<li><p>Per-band <strong>surface brightness profiles</strong> calibrated to a common sky background measured
-adaptively at the edge of each galaxy (Module 3).</p></li>
-<li><p>Integrated <strong>photometric and structural parameters</strong> — asymptotic magnitudes, effective
-radii, isophotal radii, concentration indices, and more (Module 4).</p></li>
-<li><p>Automatic <strong>disc break classification</strong> into Type I (pure exponential), Type II
+the target.</p></li>
+<li><p><strong>Module 2</strong>: Radial <strong>position-angle (PA) and ellipticity (ε) profiles</strong> measured via elliptical
+isophote fitting.</p></li>
+<li><p><strong>Module 3</strong>:  Per-band <strong>surface brightness profiles</strong> calibrated to a common sky background measured
+adaptively at the edge of each galaxy.</p></li>
+<li><p><strong>Module 4</strong>: Integrated <strong>photometric and structural parameters</strong> — asymptotic magnitudes, effective
+radii, isophotal radii, concentration indices, and more.</p></li>
+<li><p><strong>Module 5</strong>: Automatic <strong>disc break classification</strong> into Type I (pure exponential), Type II
 (down-bending), Type III (up-bending), and composite (e.g. Type II+III) profiles,
-together with best-fit structural parameters for each disc component (Module 5).</p></li>
+together with best-fit structural parameters for each disc component.</p></li>
 </ul>
 <p>The pipeline is parallelised with Python’s <code class="docutils literal notranslate"><span class="pre">multiprocessing.Pool</span></code> and is driven by a
-YAML configuration file; see <a class="reference internal" href="usage.html"><span class="doc">Usage</span></a> for details.</p>
+YAML configuration file. It is also implemented on the scientific platform of ESA, <a class="reference external" href="https://datalabs.esa.int/">Datalabs</a> see <a class="reference internal" href="usage.html"><span class="doc">Usage</span></a> for details.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
@@ -125,7 +126,16 @@ YAML configuration file; see <a class="reference internal" href="usage.html"><sp
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pipeline/index.html">Pipeline Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pipeline/index.html#data-flow">Data flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline/index.html#modules">Modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mer.html">Comparison with MER photometry</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mer.html#photometry-methods-in-mer">Photometry Methods in MER</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mer.html#comparison-of-asymptotic-magnitudes">Comparison of Asymptotic Magnitudes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mer.html#results-tphot-vs-aphot">Results: TPHOT vs APHOT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mer.html#interpretation-of-differences">Interpretation of Differences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mer.html#example-color-gradient-effects">Example: Color Gradient Effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mer.html#recommendations">Recommendations</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a><ul>
