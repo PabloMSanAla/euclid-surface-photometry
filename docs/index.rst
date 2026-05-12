@@ -38,7 +38,7 @@ The pipeline produces, for each galaxy:
   together with best-fit structural parameters for each disc component.
 
 The pipeline is parallelised with Python's ``multiprocessing.Pool`` and is driven by a
-YAML configuration file. It is also implemented on the scientific platform of ESA, `Datalabs`_ see :doc:`usage` for details.
+YAML configuration file. It is also implemented on the scientific platform of ESA, `Datalabs`_ conected directly with the *Euclid* data archive. See :doc:`usage` for details.
 
 .. _Datalabs: https://datalabs.esa.int/
 
@@ -50,6 +50,7 @@ YAML configuration file. It is also implemented on the scientific platform of ES
    usage
    pipeline/index
    mer
+   references
    api/index
    changelog
 

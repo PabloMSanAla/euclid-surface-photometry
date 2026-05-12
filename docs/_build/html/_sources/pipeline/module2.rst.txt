@@ -77,3 +77,4 @@ Output file
    The ``result`` table returned by this function is passed directly as the
    ``master`` argument to :func:`~euclid_pipelines.euclid_module3`, carrying
    both the geometry columns and the metadata dictionary.
+

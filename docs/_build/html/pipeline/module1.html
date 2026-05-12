@@ -63,6 +63,8 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../mer.html">Comparison with MER photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
@@ -147,14 +149,14 @@ regions.</p>
 <h3>Background model restoration<a class="headerlink" href="#background-model-restoration" title="Link to this heading"></a></h3>
 <p>The MER pipeline subtracts a large-scale background model before delivering
 the science mosaics (<code class="docutils literal notranslate"><span class="pre">EUC_MER_BGSUB-MOSAIC</span></code>).  This subtraction can
-over-remove flux at the positions of large or bright galaxies (<a href="#id1"><span class="problematic" id="id2">:cite:t:`Urbano25`</span></a>).
+over-remove flux at the positions of large or bright galaxies (<span class="bibtex-citation" id="id1"></span>).
 To mitigate this effect, the MER background model (<code class="docutils literal notranslate"><span class="pre">EUC_MER_BGMOD</span></code>) is added
 back to each cutout before any further analysis.</p>
 </section>
 <section id="centre-refinement">
 <h3>Centre refinement<a class="headerlink" href="#centre-refinement" title="Link to this heading"></a></h3>
 <p>After constructing the VIS cutout, the galaxy centre is refined using the
-<strong>Hill Climb</strong> algorithm of <strong>AutoProf</strong> (<a href="#id3"><span class="problematic" id="id4">:cite:t:`Autoprof`</span></a>).  The algorithm
+<strong>Hill Climb</strong> algorithm of <strong>AutoProf</strong> (<span class="bibtex-citation" id="id2">Stone <em>et al.</em> [<a class="reference internal" href="../references.html#id189" title="Connor J. Stone, Nikhil Arora, Stéphane Courteau, and Jean-Charles Cuillandre. AutoProf - I. An automated non-parametric light profile pipeline for modern galaxy surveys. \mnras , 508(2):1870-1887, December 2021. arXiv:2106.13809, doi:10.1093/mnras/stab2709.">9</a>]</span>).  The algorithm
 applies iterative FFT-based gradient detection followed by parabolic fitting
 and Nelder-Mead optimisation to converge on the global flux peak, ignoring
 local features such as bars or HII regions.  The updated (RA, Dec) coordinates
@@ -167,17 +169,17 @@ surface brightness levels.  A multi-step hierarchical masking strategy is used:<
 <ol class="arabic">
 <li><p><strong>MER segmentation map</strong> (<code class="docutils literal notranslate"><span class="pre">EUC_MER_FINAL-SEGMAP</span></code>): provides an initial
 catalogue of detected sources from <strong>SourceXtractor++</strong>.</p></li>
-<li><p><strong>NoiseChisel</strong> (<a href="#id5"><span class="problematic" id="id6">:cite:t:`noisechisel`</span></a>): detects all pixels with signal down
+<li><p><strong>NoiseChisel</strong> (<span class="bibtex-citation" id="id3">Akhlaghi [<a class="reference internal" href="../references.html#id190" title="Mohammad Akhlaghi. Carving out the low surface brightness universe with NoiseChisel. arXiv e-prints, pages arXiv:1909.11230, Sep 2019. arXiv:1909.11230.">10</a>]</span>): detects all pixels with signal down
 to very low S/N on the VIS image.  A detection map is produced that serves
 as the target map for watershed filling.</p></li>
 <li><p><strong>Watershed growing</strong>: the MER segments are grown to fill the NoiseChisel
 detection map using the <code class="docutils literal notranslate"><span class="pre">scikit-image.segmentation.watershed</span></code> algorithm
-(<a href="#id7"><span class="problematic" id="id8">:cite:t:`scikit-image`</span></a>) applied to an LRGB image constructed from
+(<span class="bibtex-citation" id="id4"></span>) applied to an LRGB image constructed from
 <span class="math notranslate nohighlight">\(J_\mathrm{E}\)</span>, <span class="math notranslate nohighlight">\(H_\mathrm{E}\)</span>, <span class="math notranslate nohighlight">\(Y_\mathrm{E}\)</span> (colour
 channels) and <span class="math notranslate nohighlight">\(I_\mathrm{E}\)</span> (luminance), stretched with the
 <code class="docutils literal notranslate"><span class="pre">asinh</span></code> transform.  The colour information improves deblending performance
 compared to using a single band.</p></li>
-<li><p><strong>MTObjects deblending</strong> (<a href="#id9"><span class="problematic" id="id10">:cite:t:`mtobjects`</span></a>): run on the VIS image with
+<li><p><strong>MTObjects deblending</strong> (<span class="bibtex-citation" id="id5">Teeninga <em>et al.</em> [<a class="reference internal" href="../references.html#id191" title="Paul Teeninga, Ugo Moschini, Scott C Trager, and Michael HF Wilkinson. Improved detection of faint extended astronomical objects through statistical attribute filtering. In International Symposium on Mathematical Morphology and Its Applications to Signal and Image Processing, 157–168. Springer, 2015.">11</a>]</span>): run on the VIS image with
 <code class="docutils literal notranslate"><span class="pre">move_factor</span> <span class="pre">=</span> <span class="pre">0.3</span></code> to identify sub-structure within the galaxy footprint.</p></li>
 <li><p><strong>Cosine similarity filter</strong>: distinguishes foreground/background sources
 from real galaxy substructure using the multi-band colour vector.</p>
@@ -199,14 +201,14 @@ high-redshift point sources not resolved by MTObjects) are morphologically
 eroded and dilated, and regions larger than FWHM² pixels are masked.
 The central 20 % of each galaxy segment is always left unmasked.</p></li>
 </ol>
-<figure class="align-center" id="id11">
+<figure class="align-center" id="id6">
 <a class="reference internal image-reference" href="../_images/EUC_SEGMID_-612927984481008950_mask_segment.png"><img alt="Mask comparison for EUCL J040510.27−444836.3" src="../_images/EUC_SEGMID_-612927984481008950_mask_segment.png" style="width: 95%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><em>Mask comparison for EUCL J040510.27−444836.3.  Top row (left to right):
 LRGB image, cosine similarity map (:math:`vec{S}_C`), MER segmentation map,
 and watershed output.  Bottom row (left to right): NoiseChisel+Segment,
-MTObjects, cosine similarity regions, and the final combined mask.</em></span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+MTObjects, cosine similarity regions, and the final combined mask.</em></span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>

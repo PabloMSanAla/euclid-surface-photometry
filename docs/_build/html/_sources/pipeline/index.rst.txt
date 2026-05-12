@@ -52,7 +52,7 @@ Modules
 
 .. code-block:: text
 
-   Master catalogue (ra, dec, kron_radius, redshift)
+   Master catalogue (object_id, ra, dec, kron_radius, redshift)
            │
            ▼
    ┌────────────────────────────────┐

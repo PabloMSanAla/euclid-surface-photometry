@@ -16,13 +16,13 @@ For the ``APHOT`` correction using the largest aperture (4 FWHM):
 
 .. math::
 
-   \frac{\texttt{FLUX\_H\_4FWHM\_APER}}{\texttt{FLUX\_VIS\_4FWHM\_APER}}
+   \frac{\texttt{FLUX_H_4FWHM_APER}}{\texttt{FLUX_VIS_4FWHM_APER}}
 
 For the ``TPHOT`` correction:
 
 .. math::
 
-   \frac{\texttt{FLUX\_H\_TEMPLFIT}}{\texttt{FLUX\_VIS\_TO\_H\_TEMPLFIT}}
+   \frac{\texttt{FLUX_H_TEMPLFIT}}{\texttt{FLUX_VIS_TO_H_TEMPLFIT}}
 
 These factors are multiplied by the parameter ``FLUX_DETECTION_TOTAL`` to obtain the total flux of the source in the NIR and ``EXT`` bands (where ``EXT`` refers to the complementary optical images included in EWS from external ground-based facilities). These are the best estimates of the total flux of the source in MER.
 
@@ -98,3 +98,6 @@ Based on our analysis:
 2. Our method recovers photometry with a scatter (~0.05–0.07 mag) **within the errors of the photometry provided by MER**, but recovers slightly more flux (~0.09–0.12 mag) than MER, especially for the fainter sources.
 
 3. For **bright sources (>17.5 mag)**, be aware that ``APHOT`` corrections may overestimate flux due to color gradients between the central and outer regions of galaxies.
+
+.. bibliography:: references.bib
+   :style: unsrt

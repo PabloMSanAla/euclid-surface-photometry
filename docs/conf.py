@@ -23,7 +23,9 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.intersphinx',
     'sphinx.ext.autosectionlabel',
+    'sphinxcontrib.bibtex',
 ]
+bibtex_bibfiles = ['references.bib']
 
 templates_path   = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']

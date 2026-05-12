@@ -63,6 +63,8 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../mer.html">Comparison with MER photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
@@ -151,8 +153,8 @@ identified as the first radius at which <span class="math notranslate nohighligh
 mean of the profile by more than <span class="math notranslate nohighlight">\(3\,\sigma\)</span>.  The derivative is
 estimated by a linear fit to the five adjacent profile points to suppress local
 noise, and the intensity profile <span class="math notranslate nohighlight">\(I_b\)</span> is pre-smoothed with a
-Savitzky–Golay filter (window = 5, polynomial degree = 1; <a href="#id1"><span class="problematic" id="id2">:cite:t:`SG-Filter`</span></a>
-via <a href="#id3"><span class="problematic" id="id4">:cite:t:`scipy`</span></a>) to remove high-frequency artefacts.</p>
+Savitzky–Golay filter (window = 5, polynomial degree = 1; <span class="bibtex-citation" id="id1">Savitzky and Golay [<a class="reference internal" href="../references.html#id30" title="Abraham. Savitzky and M. J. E. Golay. Smoothing and differentiation of data by simplified least squares procedures. Analytical Chemistry, 36(8):1627-1639, 1964. URL: https://doi.org/10.1021/ac60214a047, arXiv:https://doi.org/10.1021/ac60214a047, doi:10.1021/ac60214a047.">13</a>]</span>
+via <span class="bibtex-citation" id="id2">Virtanen <em>et al.</em> [<a class="reference internal" href="../references.html#id187" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: Fundamental Algorithms for Scientific Computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">14</a>]</span>) to remove high-frequency artefacts.</p>
 <p>This radius is set as <span class="math notranslate nohighlight">\(R_\mathrm{max}\)</span> for that band.</p>
 <p><strong>Step 3 — Background value and uncertainty.</strong>
 The sky value for each band is the sigma-clipped median of the unmasked pixels
@@ -163,7 +165,7 @@ the background uncertainty (standard deviation of box medians normalised by
 <p>The maximum <span class="math notranslate nohighlight">\(R_\mathrm{max}\)</span> across all bands defines a common outer
 radius out to which the master profile is optionally extended via logarithmic
 interpolation before profile extraction.</p>
-<figure class="align-center" id="id5">
+<figure class="align-center" id="id3">
 <a class="reference internal image-reference" href="../_images/Euclid_Pipeline_M3.png"><img alt="M3 panel – sky background estimation" src="../_images/Euclid_Pipeline_M3.png" style="width: 85%;" />
 </a>
 <figcaption>
@@ -172,7 +174,7 @@ around the sky level, with the elliptical and square apertures used to
 measure the background.  Top right: intensity profile (grey dots = all
 pixels; red = sigma-clipped mean; green = Savitzky–Golay smoothed) and
 :math:`I_b/I_b^prime` profile below.  Bottom left: final SB profiles in
-all</em> Euclid <em>bands.  Bottom right:</em> Euclid <em>colour profiles.</em></span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+all</em> Euclid <em>bands.  Bottom right:</em> Euclid <em>colour profiles.</em></span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>

@@ -21,7 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="API Reference" href="../api/index.html" />
+    <link rel="next" title="Comparison with MER photometry" href="../mer.html" />
     <link rel="prev" title="Module 4 – Derived Photometric Parameters" href="module4.html" /> 
 </head>
 
@@ -63,6 +63,8 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../mer.html">Comparison with MER photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
@@ -126,7 +128,7 @@ classify the breaks in the profile and measure the parameters of the galaxy mode
 <p>Module 5 classifies each galaxy’s surface brightness profile into one of
 several disc break types and fits parametric models to each disc component.
 The method is adapted from the change-point analysis of
-<a href="#id1"><span class="problematic" id="id2">:cite:t:`Watkins19`</span></a> and <a href="#id3"><span class="problematic" id="id4">:cite:t:`Sanchez-Alarcon23`</span></a>, extended with automated
+<span class="bibtex-citation" id="id1">Watkins <em>et al.</em> [<a class="reference internal" href="../references.html#id70" title="Aaron E. Watkins, Jarkko Laine, Sébastien Comerón, Joachim Janz, and Heikki Salo. Varied origins of up-bending breaks in galaxy disks. \aap , 625:A36, May 2019. arXiv:1903.09384, doi:10.1051/0004-6361/201935130.">18</a>]</span> and <span class="bibtex-citation" id="id2">Sánchez-Alarcón <em>et al.</em> [<a class="reference internal" href="../references.html#id124" title="P. M. Sánchez-Alarcón, J. Román, J. H. Knapen, L. Verdes-Montenegro, S. Comerón, R. M. Rich, J. E. Beckman, M. Argudo-Fernández, P. Ramírez-Moreta, J. Blasco, E. Unda-Sanzana, J. Garrido, and S. Sánchez-Exposito. The AMIGA sample of isolated galaxies. XIV. Disc breaks and interactions through ultra-deep optical imaging. \aap , 677:A117, September 2023. arXiv:2307.02527, doi:10.1051/0004-6361/202346719.">19</a>]</span>, extended with automated
 piecewise fitting and Bayesian model selection.</p>
 <section id="profile-preparation">
 <h3>Profile preparation<a class="headerlink" href="#profile-preparation" title="Link to this heading"></a></h3>
@@ -137,10 +139,10 @@ magnitudes:</p>
                     + 5\log_{10}(\mathrm{scale}) + c \,,\]</div>
 <p>where <code class="docutils literal notranslate"><span class="pre">scale</span></code> is the pixel scale in arcsec pixel⁻¹ and the correction
 <span class="math notranslate nohighlight">\(c = c_1 + c_2\)</span> includes:</p>
-<p><strong>Redshift surface brightness dimming</strong> (<a href="#id5"><span class="problematic" id="id6">:cite:t:`Ribeiro2016`</span></a>):</p>
+<p><strong>Redshift surface brightness dimming</strong> (<span class="bibtex-citation" id="id3"></span>):</p>
 <div class="math notranslate nohighlight">
 \[c_1 = -7.5\log_{10}(1+z) \,.\]</div>
-<p><strong>Inclination correction</strong> (following <a href="#id7"><span class="problematic" id="id8">:cite:t:`Sanchez-Alarcon25`</span></a>):</p>
+<p><strong>Inclination correction</strong> (following <span class="bibtex-citation" id="id4">Sánchez-Alarcón <em>et al.</em> [<a class="reference internal" href="../references.html#id122" title="P. M. Sánchez-Alarcón, H. Salo, J. H. Knapen, S. Comerón, J. Román, A. E. Watkins, R. J. Buta, S. Laine, J. M. Falcón-Ramírez, M. Anetjärvi, E. Athanassoula, A. Bosma, D. A. Gadotti, J. L. Hinz, L. C. Ho, B. W. Holwerda, J. Janz, T. Kim, J. Koda, J. Laine, E. Laurikainen, B. F. Madore, K. Menéndez-Delmestre, R. F. Peletier, M. Querejeta, A. Ruokanen, K. Sheth, and D. Zaritsky. The Complete Spitzer Survey of Stellar Structure in Galaxies (CS$^4$G). \aap , 697:A38, May 2025. arXiv:2503.09680, doi:10.1051/0004-6361/202451641.">16</a>]</span>):</p>
 <div class="math notranslate nohighlight">
 \[c_2 = -2.5\log_{10}(1-\varepsilon) \,,\]</div>
 <p>where <span class="math notranslate nohighlight">\(\varepsilon\)</span> is the median ellipticity at <span class="math notranslate nohighlight">\(\mu &gt; 25.5\)</span>
@@ -187,7 +189,7 @@ fitted with a Sérsic profile in mag arcsec⁻² units:</p>
 <span class="math notranslate nohighlight">\((\mu_\mathrm{e},\, R_\mathrm{e},\, n)\)</span>.</p>
 <p><strong>Outer regions (broken or single exponential):</strong>
 For each outer region, two models are considered:</p>
-<p><em>Broken exponential</em> (<a href="#id9"><span class="problematic" id="id10">:cite:t:`2016A&amp;A...587A..70S`</span></a>):</p>
+<p><em>Broken exponential</em> (<span class="bibtex-citation" id="id5">Sánchez-Menguiano <em>et al.</em> [<a class="reference internal" href="../references.html#id193" title="L. Sánchez-Menguiano, S. F. Sánchez, I. Pérez, R. García-Benito, B. Husemann, D. Mast, A. Mendoza, T. Ruiz-Lara, Y. Ascasibar, J. Bland-Hawthorn, O. Cavichia, A. I. Díaz, E. Florido, L. Galbany, R. M. Gónzalez Delgado, C. Kehrig, R. A. Marino, I. Márquez, J. Masegosa, J. Méndez-Abreu, M. Mollá, A. Del Olmo, E. Pérez, P. Sánchez-Blázquez, V. Stanishev, C. J. Walcher, Á. R. López-Sánchez, and CALIFA Collaboration. Shape of the oxygen abundance profiles in CALIFA face-on spiral galaxies. \aap , 587:A70, March 2016. arXiv:1601.01542, doi:10.1051/0004-6361/201527450.">20</a>]</span>):</p>
 <div class="math notranslate nohighlight">
 \[\mu(r) =
 \left(\mu_\mathrm{in} + \frac{2.5}{\ln 10}\,\frac{r}{h_\mathrm{in}}\right)(1-W_b)
@@ -216,8 +218,8 @@ scale lengths) and breaks too close to the region boundaries:</p>
 The broken exponential is adopted only if both conditions are met:</p>
 <ol class="loweralpha">
 <li><p><span class="math notranslate nohighlight">\(|h_\mathrm{in} - h_\mathrm{out}|/\langle h \rangle &gt; 0.1\)</span> —
-the two scale lengths differ by at least 10 %  (<a href="#id11"><span class="problematic" id="id12">:cite:t:`Wang18`</span></a>;
-<a href="#id13"><span class="problematic" id="id14">:cite:t:`Yu25`</span></a>).</p></li>
+the two scale lengths differ by at least 10 %  (<span class="bibtex-citation" id="id6">Wang <em>et al.</em> [<a class="reference internal" href="../references.html#id130" title="Jing Wang, Zheng Zheng, Richard D'Souza, Houjun Mo, Gyula Józsa, Cheng Li, Peter Kamphuis, Barbara Catinella, Li Shao, Claudia del P. Lagos, Min Du, and Zhizheng Pan. The prevalence of type III disc breaks in H I-rich and low-spin galaxies. \mnras , 479(4):4292-4306, October 2018. arXiv:1806.09353, doi:10.1093/mnras/sty1687.">21</a>]</span>;
+<span class="bibtex-citation" id="id7">Yu <em>et al.</em> [<a class="reference internal" href="../references.html#id330" title="Si-Yue Yu, Dewang Xu, Boris S. Kalita, Sijia Li, John D. Silverman, Xinyue Liang, and Taotao Fang. Color profiles of disk galaxies at z = 1–3 observed with JWST: Implications for outer-disk formation histories. \aap , 693:L9, January 2025. arXiv:2412.13064, doi:10.1051/0004-6361/202452752.">22</a>]</span>).</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathrm{BIC}_\mathrm{broken} &lt; \mathrm{BIC}_\mathrm{single}\)</span>, where</p>
 <div class="math notranslate nohighlight">
 \[\mathrm{BIC} = N\ln\!\left(\chi^2/N\right) + \ln(N)\,N_\mathrm{varys} \,.\]</div>
@@ -235,8 +237,8 @@ BIC is lower.  Profiles requiring more than four disc components are flagged as
 <strong>Null</strong>.</p>
 <p>The resulting scale lengths <span class="math notranslate nohighlight">\((h_1, h_2, h_3)\)</span> — ordered from the galaxy
 centre outward — determine the break type:</p>
-<table class="docutils align-default" id="id15">
-<caption><span class="caption-text">Break type classification</span><a class="headerlink" href="#id15" title="Link to this table"></a></caption>
+<table class="docutils align-default" id="id8">
+<caption><span class="caption-text">Break type classification</span><a class="headerlink" href="#id8" title="Link to this table"></a></caption>
 <colgroup>
 <col style="width: 15.0%" />
 <col style="width: 10.0%" />
@@ -290,7 +292,7 @@ centre outward — determine the break type:</p>
 <p>Estimated classification accuracy is <strong>~70 %</strong> based on visual inspection of
 490 randomly selected galaxies from the reliable sample
 (<span class="math notranslate nohighlight">\(\chi^2_\nu &lt; 0.75\)</span>, <span class="math notranslate nohighlight">\(\chi^2_\mathrm{max} &lt; 7.4\)</span>).</p>
-<figure class="align-center" id="id16">
+<figure class="align-center" id="id9">
 <a class="reference internal image-reference" href="../_images/Euclid_Pipeline_M5.png"><img alt="M5 panel – change-point analysis and profile fit" src="../_images/Euclid_Pipeline_M5.png" style="width: 100%;" />
 </a>
 <figcaption>
@@ -298,16 +300,16 @@ centre outward — determine the break type:</p>
 profile and its derivative :math:`mu^prime`.  Bottom left: cumulative sum
 CS with the single detected peak (after masking the inner region) used to
 define two disc regions.  Bottom right: best-fit broken exponential (Type II)
-overlaid on the observed profile.</em></span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+overlaid on the observed profile.</em></span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-center" id="id17">
+<figure class="align-center" id="id10">
 <a class="reference internal image-reference" href="../_images/average_profiles_VIS.png"><img alt="Stacked profiles by disc break type" src="../_images/average_profiles_VIS.png" style="width: 90%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><em>Stacked normalised SB profiles for Type I, II, III, and II+III galaxies.
 Profiles are scaled to the break radius and the surface brightness at the
-break.  For Type I, the scale length and central SB are used.</em></span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+break.  For Type I, the scale length and central SB are used.</em></span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -359,7 +361,7 @@ table above)</p></td>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="module4.html" class="btn btn-neutral float-left" title="Module 4 – Derived Photometric Parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../api/index.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../mer.html" class="btn btn-neutral float-right" title="Comparison with MER photometry" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

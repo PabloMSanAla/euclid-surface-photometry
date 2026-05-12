@@ -1,3 +1,4 @@
+
 .. _module5:
 
 Module 5 – Disc Break Classification
@@ -252,3 +253,4 @@ Output file
        table above)
    * - ``sb_threshold``, ``rad_cut``, ``sb_cut``
      - Applied SB threshold and corresponding profile truncation radius/SB
+

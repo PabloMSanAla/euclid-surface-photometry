@@ -64,6 +64,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../mer.html">Comparison with MER photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
@@ -128,8 +129,8 @@ geometry used to extract surface brightness profiles in all bands (Module 3).</p
 <section id="isophote-fitting">
 <h3>Isophote fitting<a class="headerlink" href="#isophote-fitting" title="Link to this heading"></a></h3>
 <p>The measurement uses the <strong>AutoProf</strong> implementation of the
-<a href="#id1"><span class="problematic" id="id2">:cite:t:`Jedrzejewski`</span></a> harmonic-expansion method, specifically the
-<code class="docutils literal notranslate"><span class="pre">Isophote_Fit_FFT_Robust</span></code> function (<a href="#id3"><span class="problematic" id="id4">:cite:t:`Autoprof`</span></a>).  Elliptical
+<span class="bibtex-citation" id="id1">Jedrzejewski [<a class="reference internal" href="../references.html#id50" title="Robert I. Jedrzejewski. CCD surface photometry of elliptical galaxies - I. Observations, reduction and results. \mnras , 226:747-768, June 1987. doi:10.1093/mnras/226.4.747.">12</a>]</span> harmonic-expansion method, specifically the
+<code class="docutils literal notranslate"><span class="pre">Isophote_Fit_FFT_Robust</span></code> function (<span class="bibtex-citation" id="id2">Stone <em>et al.</em> [<a class="reference internal" href="../references.html#id189" title="Connor J. Stone, Nikhil Arora, Stéphane Courteau, and Jean-Charles Cuillandre. AutoProf - I. An automated non-parametric light profile pipeline for modern galaxy surveys. \mnras , 508(2):1870-1887, December 2021. arXiv:2106.13809, doi:10.1093/mnras/stab2709.">9</a>]</span>).  Elliptical
 apertures are fitted to the VIS image at a series of semi-major axis (SMA)
 positions.</p>
 <p>Key algorithmic choices:</p>
@@ -153,13 +154,13 @@ geometric parameters.</p></li>
 </ul>
 <p>The result is a table of PA, <span class="math notranslate nohighlight">\(\varepsilon\)</span>, and their uncertainties as a
 function of SMA, forming the <strong>master geometry profile</strong> for the source.</p>
-<figure class="align-center" id="id5">
+<figure class="align-center" id="id3">
 <a class="reference internal image-reference" href="../_images/Euclid_Pipeline_M2.png"><img alt="M2 panel of the pipeline illustration" src="../_images/Euclid_Pipeline_M2.png" style="width: 85%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><em>M2 panel: resulting PA (upper left) and :math:`varepsilon` (lower left)
 profiles for EUCL J040743.76−465230.1, and the corresponding elliptical
-apertures overlaid on the colour image (right, masked pixels in red).</em></span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+apertures overlaid on the colour image (right, masked pixels in red).</em></span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>

@@ -107,3 +107,4 @@ Output file
    If the primary background estimation (``background_estimation_euclid``) fails
    (e.g., when the galaxy fills the cutout), the fallback is the global
    sigma-clipped statistics of the masked image.
+

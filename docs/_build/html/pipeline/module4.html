@@ -63,6 +63,8 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../mer.html">Comparison with MER photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
@@ -128,8 +130,8 @@ Measure the resolved photometry on the surface brightness profiles of different 
 <p>Module 4 converts the surface brightness profiles from M3 into a set of
 physically meaningful integrated and structural parameters for each photometric
 band.  The methodology follows the <strong>S⁴G</strong> (Spitzer Survey of Stellar Structure
-in Galaxies; <a href="#id1"><span class="problematic" id="id2">:cite:t:`Seth10`</span></a>; <a href="#id3"><span class="problematic" id="id4">:cite:t:`Munoz-Mateos13`</span></a>) and <strong>CS⁴G</strong>
-(<a href="#id5"><span class="problematic" id="id6">:cite:t:`Sanchez-Alarcon25`</span></a>) pipelines.</p>
+in Galaxies; <span class="bibtex-citation" id="id1">Sheth <em>et al.</em> [<a class="reference internal" href="../references.html#id32" title="Kartik Sheth, Michael Regan, Joannah L. Hinz, Armando Gil de Paz, Karín Menéndez-Delmestre, Juan-Carlos Muñoz-Mateos, Mark Seibert, Taehyun Kim, Eija Laurikainen, Heikki Salo, Dimitri A. Gadotti, Jarkko Laine, Trisha Mizusawa, Lee Armus, E. Athanassoula, Albert Bosma, Ronald J. Buta, Peter Capak, Thomas H. Jarrett, Debra M. Elmegreen, Bruce G. Elmegreen, Johan H. Knapen, Jin Koda, George Helou, Luis C. Ho, Barry F. Madore, Karen L. Masters, Bahram Mobasher, Patrick Ogle, Chien Y. Peng, Eva Schinnerer, Jason A. Surace, Dennis Zaritsky, Sébastien Comerón, Bonita de Swardt, Sharon E. Meidt, Mansi Kasliwal, and Manuel Aravena. The Spitzer Survey of Stellar Structure in Galaxies (S4G). \pasp , 122(898):1397, December 2010. arXiv:1010.1592, doi:10.1086/657638.">15</a>]</span>; <span class="bibtex-citation" id="id2"></span>) and <strong>CS⁴G</strong>
+(<span class="bibtex-citation" id="id3">Sánchez-Alarcón <em>et al.</em> [<a class="reference internal" href="../references.html#id122" title="P. M. Sánchez-Alarcón, H. Salo, J. H. Knapen, S. Comerón, J. Román, A. E. Watkins, R. J. Buta, S. Laine, J. M. Falcón-Ramírez, M. Anetjärvi, E. Athanassoula, A. Bosma, D. A. Gadotti, J. L. Hinz, L. C. Ho, B. W. Holwerda, J. Janz, T. Kim, J. Koda, J. Laine, E. Laurikainen, B. F. Madore, K. Menéndez-Delmestre, R. F. Peletier, M. Querejeta, A. Ruokanen, K. Sheth, and D. Zaritsky. The Complete Spitzer Survey of Stellar Structure in Galaxies (CS$^4$G). \aap , 697:A38, May 2025. arXiv:2503.09680, doi:10.1051/0004-6361/202451641.">16</a>]</span>) pipelines.</p>
 <section id="asymptotic-magnitude">
 <h3>Asymptotic magnitude<a class="headerlink" href="#asymptotic-magnitude" title="Link to this heading"></a></h3>
 <p>Total magnitudes are derived from the <strong>curve of growth</strong> (CoG), i.e. the
@@ -137,15 +139,15 @@ cumulative flux as a function of aperture radius.  Because the CoG does not
 always reach a true plateau (faint flux continues to accumulate), the
 asymptotic magnitude is obtained by fitting a straight line to the final,
 settling portion of the CoG and extrapolating to its y-intercept
-(<a href="#id7"><span class="problematic" id="id8">:cite:t:`Watkins22`</span></a>).</p>
-<figure class="align-center" id="id9">
+(<span class="bibtex-citation" id="id4">Watkins <em>et al.</em> [<a class="reference internal" href="../references.html#id3" title="A. E. Watkins, H. Salo, E. Laurikainen, S. Díaz-García, S. Comerón, J. Janz, A. H. Su, R. Buta, E. Athanassoula, A. Bosma, L. C. Ho, B. W. Holwerda, T. Kim, J. H. Knapen, S. Laine, K. Menéndez-Delmestre, R. F. Peletier, K. Sheth, and D. Zaritsky. Stellar masses, sizes, and radial profiles for 465 nearby early-type galaxies: An extension to the Spitzer survey of stellar structure in Galaxies (S$^4$G). \aap , 660:A69, April 2022. arXiv:2201.08381, doi:10.1051/0004-6361/202142627.">17</a>]</span>).</p>
+<figure class="align-center" id="id5">
 <a class="reference internal image-reference" href="../_images/Euclid_Pipeline_M4.png"><img alt="M4 panel – curve of growth" src="../_images/Euclid_Pipeline_M4.png" style="width: 85%;" />
 </a>
 <figcaption>
 <p><span class="caption-text"><em>Left M4 panel: curve of growth for EUCL J040743.76−465230.1 used to derive
 the asymptotic magnitude in the</em> <span class="math notranslate nohighlight">\(I_\mathrm{E}\)</span> <em>band.  Right M4
 panel: comparison between our asymptotic magnitudes and the MER catalogue
-magnitudes; our method recovers on average 0.09 mag more flux.</em></span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+magnitudes; our method recovers on average 0.09 mag more flux.</em></span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
